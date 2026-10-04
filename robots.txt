@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://ultramarine963.com/sitemap.xml
