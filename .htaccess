@@ -1,0 +1,11 @@
+RewriteEngine On
+
+# Canonical host: apex (www serves identical content otherwise - duplicate)
+RewriteCond %{HTTP_HOST} ^www\.ultramarine963\.com$ [NC]
+RewriteRule ^(.*)$ https://ultramarine963.com/$1 [R=301,L]
+
+# Conventional German pretty URLs -> the actual flat files
+RewriteRule ^impressum/?$ /impressum.html [R=301,L]
+RewriteRule ^datenschutz/?$ /datenschutz.html [R=301,L]
+
+ErrorDocument 404 /index.html
