@@ -1,0 +1,316 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="aiffiliation — Projekte & Fleet: die Flotte, eine Umsatz-Prognose und fünf Projekt-Highlights. DE/EN, hell/dunkel.">
+<meta name="robots" content="index,follow">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<title>aiffiliation Projekte</title>
+<style>
+html,body{margin:0;padding:0}
+img{max-width:100%}
+[hidden]{display:none!important}
+:root{color-scheme:light}
+</style>
+<style>
+  /* Layout concept: editorial one-column showcase — sticky brand bar, fleet table, a labelled projection chart, and five project bands; slate neutrals with a single cyan accent and a warm amber for highlights. */
+  :root{
+    --bg:#f6f7f9; --surface:#ffffff; --surface-2:#eef1f4; --border:#dde2e8;
+    --fg:#17202b; --muted:#5c6773; --faint:#8b96a3;
+    --accent:#0e8f9e; --accent-ink:#0a6b77; --amber:#c97a16; --good:#2f8f5b;
+    --shadow:0 1px 2px rgba(23,32,43,.06),0 8px 24px rgba(23,32,43,.06);
+    --display:"Sora",system-ui,sans-serif; --body:"IBM Plex Sans",system-ui,sans-serif; --mono:"IBM Plex Mono",ui-monospace,monospace;
+  }
+  @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+    --bg:#0e141b; --surface:#161e28; --surface-2:#1d2732; --border:#2a3540;
+    --fg:#e8edf2; --muted:#a3afbb; --faint:#71808d;
+    --accent:#2bc2d4; --accent-ink:#8fe3ee; --amber:#e3a24a; --good:#5bc98b;
+    --shadow:0 1px 2px rgba(0,0,0,.4),0 10px 30px rgba(0,0,0,.35); color-scheme:dark;
+  }}
+  :root[data-theme="dark"]{
+    --bg:#0e141b; --surface:#161e28; --surface-2:#1d2732; --border:#2a3540;
+    --fg:#e8edf2; --muted:#a3afbb; --faint:#71808d;
+    --accent:#2bc2d4; --accent-ink:#8fe3ee; --amber:#e3a24a; --good:#5bc98b;
+    --shadow:0 1px 2px rgba(0,0,0,.4),0 10px 30px rgba(0,0,0,.35); color-scheme:dark;
+  }
+  *{box-sizing:border-box}
+  body{background:var(--bg);color:var(--fg);font-family:var(--body);line-height:1.6;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:1000px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+  h1,h2,h3{font-family:var(--display);line-height:1.15;text-wrap:balance;margin:0}
+  p{margin:0}
+  a{color:var(--accent-ink)}
+  .eyebrow{font-family:var(--mono);font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--accent-ink)}
+  .muted{color:var(--muted)}
+
+  /* sticky bar */
+  body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:20;background:var(--surface)}
+  header.bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:15;background:color-mix(in srgb,var(--surface) 92%,transparent);backdrop-filter:blur(8px);border-bottom:1px solid var(--border)}
+  .bar .wrap{display:flex;align-items:center;gap:12px;padding-block:12px}
+  .brand{font-family:var(--display);font-weight:700;font-size:1.15rem;letter-spacing:-.01em}
+  .brand span{color:var(--accent)}
+  .bar .spacer{flex:1}
+  .toggle{display:inline-flex;border:1px solid var(--border);border-radius:999px;overflow:hidden;background:var(--surface-2)}
+  .toggle button{font-family:var(--mono);font-size:.74rem;letter-spacing:.04em;border:0;background:transparent;color:var(--muted);padding:6px 11px;cursor:pointer}
+  .toggle button[aria-pressed="true"]{background:var(--accent);color:#fff}
+  :root[data-theme="dark"] .toggle button[aria-pressed="true"]{color:#07242a}
+  @media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .toggle button[aria-pressed="true"]{color:#07242a}}
+
+  section{padding-block:clamp(40px,7vw,76px)}
+  .hero{padding-top:clamp(36px,6vw,64px)}
+  .hero h1{font-size:clamp(2rem,6vw,3.4rem);font-weight:700;letter-spacing:-.02em;margin-top:14px}
+  .hero .lede{font-size:clamp(1.05rem,2.4vw,1.3rem);color:var(--muted);max-width:60ch;margin-top:18px}
+  .hero .pills{display:flex;flex-wrap:wrap;gap:8px;margin-top:22px}
+  .pill{font-family:var(--mono);font-size:.74rem;border:1px solid var(--border);background:var(--surface);border-radius:999px;padding:5px 12px;color:var(--muted)}
+
+  .sechead{display:flex;flex-direction:column;gap:6px;margin-bottom:26px}
+  .sechead h2{font-size:clamp(1.4rem,3.4vw,2rem);font-weight:600;letter-spacing:-.01em}
+  .sechead p{color:var(--muted);max-width:64ch}
+
+  /* fleet table */
+  .tablecard{background:var(--surface);border:1px solid var(--border);border-radius:14px;box-shadow:var(--shadow);overflow:hidden}
+  .tscroll{overflow-x:auto}
+  table{border-collapse:collapse;width:100%;min-width:460px;font-size:.93rem}
+  th,td{text-align:left;padding:13px 16px;border-bottom:1px solid var(--border);vertical-align:top}
+  thead th{font-family:var(--mono);font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:var(--faint);font-weight:600}
+  tbody tr:last-child td{border-bottom:0}
+  td.name{font-weight:600;white-space:nowrap}
+  td.name .dot{display:inline-block;width:8px;height:8px;border-radius:999px;background:var(--accent);margin-right:8px;vertical-align:middle}
+  .costrow{display:flex;flex-wrap:wrap;gap:10px 28px;align-items:baseline;margin-top:16px;padding:16px;background:var(--surface-2);border:1px solid var(--border);border-radius:12px}
+  .costrow .big{font-family:var(--mono);font-size:1.5rem;font-weight:600;color:var(--fg);font-variant-numeric:tabular-nums}
+  .tag{font-family:var(--mono);font-size:.68rem;letter-spacing:.06em;text-transform:uppercase;color:var(--amber);border:1px solid color-mix(in srgb,var(--amber) 45%,var(--border));border-radius:6px;padding:2px 7px}
+
+  /* chart */
+  .chartcard{background:var(--surface);border:1px solid var(--border);border-radius:14px;box-shadow:var(--shadow);padding:22px}
+  .chartcard figcaption{display:flex;flex-wrap:wrap;gap:8px 14px;align-items:center;justify-content:space-between;margin-bottom:8px}
+  .chartcard .note{font-family:var(--mono);font-size:.72rem;color:var(--amber)}
+  svg .bar{fill:var(--accent)}
+  svg .bar.goal{fill:color-mix(in srgb,var(--accent) 42%,transparent)}
+  svg .axis{stroke:var(--border);stroke-width:1}
+  svg .glabel,svg .vlabel{font-family:var(--mono);font-size:11px;fill:var(--muted)}
+  svg .vtop{font-family:var(--mono);font-size:11px;fill:var(--fg);font-weight:600}
+
+  /* projects */
+  .proj{display:grid;gap:14px;margin-top:22px}
+  .projhead{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+  .projhead h3{font-size:1.25rem;font-weight:600}
+  .projhead .k{font-family:var(--mono);font-size:.72rem;color:var(--accent-ink);border:1px solid var(--border);border-radius:6px;padding:3px 8px}
+  .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+  .card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:16px;box-shadow:var(--shadow);min-width:0}
+  .card h4{font-family:var(--display);font-size:1rem;font-weight:600;margin:0 0 6px}
+  .card p{font-size:.9rem;color:var(--muted)}
+  .projband{border-top:1px solid var(--border);padding-top:30px;margin-top:6px}
+
+  .cta{background:var(--surface);border:1px solid var(--border);border-radius:16px;box-shadow:var(--shadow);padding:clamp(24px,4vw,40px);text-align:center;display:flex;flex-direction:column;gap:14px;align-items:center}
+  .cta h2{font-size:clamp(1.5rem,3.6vw,2.1rem);font-weight:600}
+  .cta .price{font-family:var(--mono);font-size:1.1rem;color:var(--accent-ink)}
+  .cta .btn{display:inline-block;background:var(--accent);color:#fff;font-weight:600;text-decoration:none;padding:12px 24px;border-radius:999px}
+  :root[data-theme="dark"] .cta .btn{color:#07242a}
+  @media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .cta .btn{color:#07242a}}
+  footer{border-top:1px solid var(--border);color:var(--faint);font-size:.82rem}
+  footer .wrap{padding-block:24px;display:flex;flex-wrap:wrap;gap:8px 20px;justify-content:space-between}
+  .disclaimer{font-family:var(--mono);font-size:.72rem;color:var(--faint);max-width:70ch;margin-top:14px}
+
+  @media (max-width:720px){.cards{grid-template-columns:1fr}}
+  @media (prefers-reduced-motion:no-preference){a.btn{transition:transform .15s ease}a.btn:active{transform:translateY(1px)}}
+  :focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:4px}
+</style>
+</head>
+<body>
+<header class="bar">
+  <div class="wrap">
+    <span class="brand">ai<span>ffiliation</span></span>
+    <span class="spacer"></span>
+    <div class="toggle" role="group" aria-label="Sprache / Language">
+      <button id="de" aria-pressed="true">DE</button>
+      <button id="en" aria-pressed="false">EN</button>
+    </div>
+    <div class="toggle" role="group" aria-label="Theme">
+      <button id="light" aria-pressed="false">☀</button>
+      <button id="dark" aria-pressed="false">☾</button>
+    </div>
+  </div>
+</header>
+
+<main>
+  <section class="hero"><div class="wrap">
+    <span class="eyebrow" data-de="Projekte & Fleet" data-en="Projects & Fleet">Projekte & Fleet</span>
+    <h1 data-de="Ein kleines Team aus KI-Agenten, das rund um die Uhr arbeitet." data-en="A small team of AI agents that works around the clock.">Ein kleines Team aus KI-Agenten, das rund um die Uhr arbeitet.</h1>
+    <p class="lede" data-de="aiffiliation betreibt eine Flotte spezialisierter Agenten — für Automation, Publishing, Handel, Kommunikation und Betrieb. Diese Seite zeigt, wie das Team aufgebaut ist und woran es gerade arbeitet." data-en="aiffiliation runs a fleet of specialised agents — for automation, publishing, trading research, communication and operations. This page shows how the team is built and what it is working on.">aiffiliation betreibt eine Flotte spezialisierter Agenten — für Automation, Publishing, Handel, Kommunikation und Betrieb. Diese Seite zeigt, wie das Team aufgebaut ist und woran es gerade arbeitet.</p>
+    <div class="pills">
+      <span class="pill" data-de="Asynchron · kein Meeting nötig" data-en="Asynchronous · no meeting needed">Asynchron · kein Meeting nötig</span>
+      <span class="pill" data-de="Lokale & Cloud-Modelle" data-en="Local & cloud models">Lokale & Cloud-Modelle</span>
+      <span class="pill" data-de="Festpreise ab €390" data-en="Fixed prices from €390">Festpreise ab €390</span>
+    </div>
+  </div></section>
+
+  <section><div class="wrap">
+    <div class="sechead">
+      <span class="eyebrow" data-de="Die Flotte" data-en="The fleet">Die Flotte</span>
+      <h2 data-de="Wer im Team was macht" data-en="Who does what on the team">Wer im Team was macht</h2>
+      <p data-de="Jeder Agent hat eine klare Rolle und läuft eigenständig. Koordiniert wird über ein gemeinsames Board." data-en="Each agent has a clear role and runs on its own. Coordination happens over a shared board.">Jeder Agent hat eine klare Rolle und läuft eigenständig. Koordiniert wird über ein gemeinsames Board.</p>
+    </div>
+    <div class="tablecard"><div class="tscroll"><table>
+      <thead><tr>
+        <th data-de="Agent" data-en="Agent">Agent</th>
+        <th data-de="Rolle" data-en="Role">Rolle</th>
+        <th data-de="Arbeitet an" data-en="Works on">Arbeitet an</th>
+      </tr></thead>
+      <tbody>
+        <tr><td class="name"><span class="dot"></span>Sophia</td><td data-de="Assistenz & Koordination" data-en="Assistance & coordination">Assistenz & Koordination</td><td data-de="Posteingänge, Antworten, Übersicht" data-en="Inboxes, replies, overview">Posteingänge, Antworten, Übersicht</td></tr>
+        <tr><td class="name"><span class="dot"></span>Bob</td><td data-de="Manager" data-en="Manager">Manager</td><td data-de="Aufgaben verteilen, nichts liegen lassen" data-en="Delegating tasks, nothing left stale">Aufgaben verteilen, nichts liegen lassen</td></tr>
+        <tr><td class="name"><span class="dot"></span>Claw</td><td data-de="Infrastruktur & Betrieb" data-en="Infrastructure & ops">Infrastruktur & Betrieb</td><td data-de="Server, Deployments, Secrets" data-en="Servers, deployments, secrets">Server, Deployments, Secrets</td></tr>
+        <tr><td class="name"><span class="dot"></span>Hermes</td><td data-de="E-Mail & Reporting" data-en="Email & reporting">E-Mail & Reporting</td><td data-de="Tägliche Zusammenfassung, Postfächer" data-en="Daily digest, mailboxes">Tägliche Zusammenfassung, Postfächer</td></tr>
+        <tr><td class="name"><span class="dot"></span>Echo</td><td data-de="Social Media" data-en="Social media">Social Media</td><td data-de="Beiträge, Community-Kanäle" data-en="Posts, community channels">Beiträge, Community-Kanäle</td></tr>
+        <tr><td class="name"><span class="dot"></span>Quanta</td><td data-de="Handels-Forschung" data-en="Trading research">Handels-Forschung</td><td data-de="Automatisierte Testnet-Experimente" data-en="Automated testnet experiments">Automatisierte Testnet-Experimente</td></tr>
+        <tr><td class="name"><span class="dot"></span>Lex</td><td data-de="Recht & Compliance" data-en="Legal & compliance">Recht & Compliance</td><td data-de="Datenschutz, Texte, Prüfungen" data-en="Privacy, texts, reviews">Datenschutz, Texte, Prüfungen</td></tr>
+        <tr><td class="name"><span class="dot"></span>Airy</td><td data-de="Posteingang-Triage" data-en="Inbox triage">Posteingang-Triage</td><td data-de="E-Mails sortieren & vorsichten" data-en="Sorting & pre-screening mail">E-Mails sortieren & vorsichten</td></tr>
+      </tbody>
+    </table></div></div>
+    <div class="costrow">
+      <div>
+        <div class="eyebrow" data-de="Laufende Kosten (Schätzung)" data-en="Running cost (estimate)">Laufende Kosten (Schätzung)</div>
+        <div class="big">~ €150<span style="font-size:.8rem;color:var(--muted)"> / <span data-de="Monat" data-en="month">Monat</span></span></div>
+      </div>
+      <p class="muted" style="font-size:.86rem;min-width:0;flex:1" data-de="Modelle, Hosting und Tools zusammen. Vieles läuft lokal auf eigener Hardware, um Kosten und Daten im Haus zu halten." data-en="Models, hosting and tools combined. Much of it runs locally on our own hardware to keep cost and data in-house.">Modelle, Hosting und Tools zusammen. Vieles läuft lokal auf eigener Hardware, um Kosten und Daten im Haus zu halten.</p>
+    </div>
+  </div></section>
+
+  <section><div class="wrap">
+    <div class="sechead">
+      <span class="eyebrow" data-de="Ausblick" data-en="Outlook">Ausblick</span>
+      <h2 data-de="Umsatz-Prognose" data-en="Revenue projection">Umsatz-Prognose</h2>
+      <p data-de="Ziele, keine garantierten Ergebnisse. Die Balken zeigen, worauf wir hinarbeiten — nicht bereits erzielte Umsätze." data-en="Targets, not guaranteed results. The bars show what we are working toward — not revenue already earned.">Ziele, keine garantierten Ergebnisse. Die Balken zeigen, worauf wir hinarbeiten — nicht bereits erzielte Umsätze.</p>
+    </div>
+    <figure class="chartcard" style="margin:0">
+      <figcaption>
+        <span class="eyebrow" data-de="Quartals-Ziel (€)" data-en="Quarterly target (€)">Quartals-Ziel (€)</span>
+        <span class="note" data-de="⚠ Prognose · keine garantierten Ergebnisse" data-en="⚠ Projection · not guaranteed results">⚠ Prognose · keine garantierten Ergebnisse</span>
+      </figcaption>
+      <div class="tscroll">
+      <svg viewBox="0 0 520 240" width="100%" height="auto" role="img" preserveAspectRatio="xMidYMid meet"
+           aria-label="Umsatz-Prognose je Quartal: Q4 2025 450, Q1 2026 900, Q2 2026 1600, Q3 2026 2600 Euro (Ziele).">
+        <line class="axis" x1="48" y1="200" x2="505" y2="200"></line>
+        <rect class="bar" x="70"  y="170" width="70" height="30"></rect>
+        <text class="vtop" x="105" y="162" text-anchor="middle">€450</text>
+        <text class="glabel" x="105" y="218" text-anchor="middle">Q4 ’25</text>
+        <rect class="bar goal" x="180" y="140" width="70" height="60"></rect>
+        <text class="vtop" x="215" y="132" text-anchor="middle">€900</text>
+        <text class="glabel" x="215" y="218" text-anchor="middle">Q1 ’26</text>
+        <rect class="bar goal" x="290" y="93" width="70" height="107"></rect>
+        <text class="vtop" x="325" y="85" text-anchor="middle">€1.600</text>
+        <text class="glabel" x="325" y="218" text-anchor="middle">Q2 ’26</text>
+        <rect class="bar goal" x="400" y="27" width="70" height="173"></rect>
+        <text class="vtop" x="435" y="19" text-anchor="middle">€2.600</text>
+        <text class="glabel" x="435" y="218" text-anchor="middle">Q3 ’26</text>
+        <text class="vlabel" x="44" y="204" text-anchor="end">0</text>
+        <text class="vlabel" x="44" y="100" text-anchor="end">1.500</text>
+        <text class="vlabel" x="44" y="31" text-anchor="end">3.000</text>
+      </svg>
+      </div>
+    </figure>
+  </div></section>
+
+  <section><div class="wrap">
+    <div class="sechead">
+      <span class="eyebrow" data-de="Projekte" data-en="Projects">Projekte</span>
+      <h2 data-de="Woran das Team arbeitet" data-en="What the team is building">Woran das Team arbeitet</h2>
+      <p data-de="Fünf laufende Projekte, jeweils drei Schlaglichter." data-en="Five live projects, three highlights each.">Fünf laufende Projekte, jeweils drei Schlaglichter.</p>
+    </div>
+
+    <div class="proj">
+      <div class="projhead"><h3>Agora</h3><span class="k" data-de="Fleet-Hub" data-en="Fleet hub">Fleet-Hub</span></div>
+      <div class="cards">
+        <div class="card"><h4 data-de="Gemeinsames Board" data-en="Shared board">Gemeinsames Board</h4><p data-de="Ein privates Forum, auf dem alle Agenten Aufgaben, Entscheidungen und Übergaben teilen." data-en="A private forum where every agent shares tasks, decisions and handoffs.">Ein privates Forum, auf dem alle Agenten Aufgaben, Entscheidungen und Übergaben teilen.</p></div>
+        <div class="card"><h4 data-de="Selbst gehostet" data-en="Self-hosted">Selbst gehostet</h4><p data-de="PHP + SQLite auf eigener Infrastruktur — Daten bleiben im Haus." data-en="PHP + SQLite on our own infrastructure — data stays in-house.">PHP + SQLite auf eigener Infrastruktur — Daten bleiben im Haus.</p></div>
+        <div class="card"><h4 data-de="Täglicher Check" data-en="Daily check">Täglicher Check</h4><p data-de="Jeder Agent liest das Board einmal am Tag und übernimmt seine Aufgaben selbst." data-en="Each agent reads the board once a day and picks up its own tasks.">Jeder Agent liest das Board einmal am Tag und übernimmt seine Aufgaben selbst.</p></div>
+      </div>
+    </div>
+
+    <div class="proj projband">
+      <div class="projhead"><h3 data-de="KDP Malbücher" data-en="KDP coloring books">KDP Malbücher</h3><span class="k" data-de="Publishing" data-en="Publishing">Publishing</span></div>
+      <div class="cards">
+        <div class="card"><h4 data-de="Titel live" data-en="Titles live">Titel live</h4><p data-de="Mehrere Malbuch-Titel über Amazon KDP veröffentlicht." data-en="Several coloring-book titles published via Amazon KDP.">Mehrere Malbuch-Titel über Amazon KDP veröffentlicht.</p></div>
+        <div class="card"><h4 data-de="Automatisierte Pipeline" data-en="Automated pipeline">Automatisierte Pipeline</h4><p data-de="Von der Themenidee über Cover bis zum fertigen Innenteil." data-en="From topic idea through cover to finished interior.">Von der Themenidee über Cover bis zum fertigen Innenteil.</p></div>
+        <div class="card"><h4 data-de="Ads & Keywords" data-en="Ads & keywords">Ads & Keywords</h4><p data-de="Keyword-Tests und kleine Anzeigen-Experimente zur Sichtbarkeit." data-en="Keyword tests and small ad experiments for visibility.">Keyword-Tests und kleine Anzeigen-Experimente zur Sichtbarkeit.</p></div>
+      </div>
+    </div>
+
+    <div class="proj projband">
+      <div class="projhead"><h3 data-de="Handels-Bots" data-en="Trading bots">Handels-Bots</h3><span class="k" data-de="Forschung" data-en="Research">Forschung</span></div>
+      <div class="cards">
+        <div class="card"><h4 data-de="Testnet-Experimente" data-en="Testnet experiments">Testnet-Experimente</h4><p data-de="Strategien laufen auf dem Börsen-Testnet — ohne echtes Geld im Experiment." data-en="Strategies run on the exchange testnet — no real money in the experiment.">Strategien laufen auf dem Börsen-Testnet — ohne echtes Geld im Experiment.</p></div>
+        <div class="card"><h4 data-de="Walk-Forward-Prüfung" data-en="Walk-forward checks">Walk-Forward-Prüfung</h4><p data-de="Jede Kandidaten-Strategie durchläuft ein mehrtägiges Prüffenster vor jeder Bewertung." data-en="Each candidate strategy passes a multi-day evaluation window before any assessment.">Jede Kandidaten-Strategie durchläuft ein mehrtägiges Prüffenster vor jeder Bewertung.</p></div>
+        <div class="card"><h4 data-de="Transparente Methodik" data-en="Transparent method">Transparente Methodik</h4><p data-de="Der Fokus liegt auf Methode und Reproduzierbarkeit, nicht auf Renditeversprechen." data-en="The focus is method and reproducibility, not return promises.">Der Fokus liegt auf Methode und Reproduzierbarkeit, nicht auf Renditeversprechen.</p></div>
+      </div>
+    </div>
+
+    <div class="proj projband">
+      <div class="projhead"><h3>Discord</h3><span class="k" data-de="Koordination" data-en="Coordination">Koordination</span></div>
+      <div class="cards">
+        <div class="card"><h4 data-de="Agenten-Kanäle" data-en="Agent channels">Agenten-Kanäle</h4><p data-de="Eigene Kanäle, über die einzelne Agenten Status und Ergebnisse melden." data-en="Dedicated channels where individual agents report status and results.">Eigene Kanäle, über die einzelne Agenten Status und Ergebnisse melden.</p></div>
+        <div class="card"><h4 data-de="Schach-Bot Gambit" data-en="Chess bot Gambit">Schach-Bot Gambit</h4><p data-de="Ein spielbarer Schach-Agent als Community-Baustein." data-en="A playable chess agent as a community building block.">Ein spielbarer Schach-Agent als Community-Baustein.</p></div>
+        <div class="card"><h4 data-de="Mensch im Loop" data-en="Human in the loop">Mensch im Loop</h4><p data-de="Entscheidungen laufen über eine Person — Agenten schlagen vor, der Mensch gibt frei." data-en="Decisions run through a person — agents propose, the human approves.">Entscheidungen laufen über eine Person — Agenten schlagen vor, der Mensch gibt frei.</p></div>
+      </div>
+    </div>
+
+    <div class="proj projband">
+      <div class="projhead"><h3 data-de="Agenten" data-en="Agents">Agenten</h3><span class="k" data-de="Die Basis" data-en="The basis">Die Basis</span></div>
+      <div class="cards">
+        <div class="card"><h4 data-de="Spezialisiert" data-en="Specialised">Spezialisiert</h4><p data-de="Jeder Agent kann eine Sache gut, statt einer, die alles halb macht." data-en="Each agent does one thing well, instead of one doing everything by halves.">Jeder Agent kann eine Sache gut, statt einer, die alles halb macht.</p></div>
+        <div class="card"><h4 data-de="Rund um die Uhr" data-en="Around the clock">Rund um die Uhr</h4><p data-de="Asynchron: Aufgaben werden auch dann bearbeitet, wenn niemand zusieht." data-en="Asynchronous: tasks get handled even when nobody is watching.">Asynchron: Aufgaben werden auch dann bearbeitet, wenn niemand zusieht.</p></div>
+        <div class="card"><h4 data-de="Lokal & Cloud" data-en="Local & cloud">Lokal & Cloud</h4><p data-de="Leichte Aufgaben laufen lokal, anspruchsvolle über Cloud-Modelle." data-en="Light tasks run locally, demanding ones over cloud models.">Leichte Aufgaben laufen lokal, anspruchsvolle über Cloud-Modelle.</p></div>
+      </div>
+    </div>
+  </div></section>
+
+  <section><div class="wrap">
+    <div class="cta">
+      <span class="eyebrow" data-de="Zusammenarbeit" data-en="Work with us">Zusammenarbeit</span>
+      <h2 data-de="KI-Automation für Ihr Unternehmen" data-en="AI automation for your business">KI-Automation für Ihr Unternehmen</h2>
+      <p class="muted" style="max-width:52ch" data-de="Feste Preise, asynchrone Zusammenarbeit, kein Meeting nötig. KI-Assistent, Business-Website oder Prozess-Automatisierung." data-en="Fixed prices, asynchronous collaboration, no meeting needed. AI assistant, business website or process automation.">Feste Preise, asynchrone Zusammenarbeit, kein Meeting nötig. KI-Assistent, Business-Website oder Prozess-Automatisierung.</p>
+      <span class="price">Festpreise ab €390</span>
+      <a class="btn" href="https://aiffiliation.de" data-de="Zu aiffiliation.de" data-en="Go to aiffiliation.de">Zu aiffiliation.de</a>
+    </div>
+    <p class="disclaimer" data-de="Hinweis: Alle zukunftsgerichteten Zahlen auf dieser Seite sind Ziele bzw. Prognosen und keine garantierten oder bereits erzielten Ergebnisse. Angaben zu Handels-Experimenten dienen der Information über die Methodik und sind keine Anlageberatung und keine Aufforderung zur Investition." data-en="Note: all forward-looking figures on this page are targets or projections, not guaranteed or already-earned results. Information on trading experiments describes methodology only and is neither investment advice nor an invitation to invest.">Hinweis: Alle zukunftsgerichteten Zahlen auf dieser Seite sind Ziele bzw. Prognosen und keine garantierten oder bereits erzielten Ergebnisse. Angaben zu Handels-Experimenten dienen der Information über die Methodik und sind keine Anlageberatung und keine Aufforderung zur Investition.</p>
+  </div></section>
+</main>
+
+<footer><div class="wrap">
+  <span>aiffiliation · KI-Automation</span>
+  <span class="muted" data-de="Greiz, Deutschland · Stand Oktober 2026" data-en="Greiz, Germany · as of October 2026">Greiz, Deutschland · Stand Oktober 2026</span>
+</div></footer>
+
+<script>
+(function(){
+  var root=document.documentElement;
+  function store(k,v){try{localStorage.setItem(k,v)}catch(e){}}
+  function load(k){try{return localStorage.getItem(k)}catch(e){return null}}
+
+  function setLang(l){
+    document.querySelectorAll('[data-de]').forEach(function(el){
+      var t=el.getAttribute('data-'+l); if(t!=null) el.textContent=t;
+    });
+    root.setAttribute('lang',l);
+    document.getElementById('de').setAttribute('aria-pressed', l==='de');
+    document.getElementById('en').setAttribute('aria-pressed', l==='en');
+    store('aiff_lang',l);
+  }
+  var lang=load('aiff_lang')|| (navigator.language&&navigator.language.slice(0,2)==='en'?'en':'de');
+  setLang(lang==='en'?'en':'de');
+  document.getElementById('de').addEventListener('click',function(){setLang('de')});
+  document.getElementById('en').addEventListener('click',function(){setLang('en')});
+
+  function setTheme(t){
+    if(t==='light'||t==='dark'){root.setAttribute('data-theme',t);} else {root.removeAttribute('data-theme');}
+    document.getElementById('light').setAttribute('aria-pressed', t==='light');
+    document.getElementById('dark').setAttribute('aria-pressed', t==='dark');
+    store('aiff_theme',t||'system');
+  }
+  var th=load('aiff_theme'); if(th==='light'||th==='dark') setTheme(th);
+  document.getElementById('light').addEventListener('click',function(){setTheme(root.getAttribute('data-theme')==='light'?'system':'light')});
+  document.getElementById('dark').addEventListener('click',function(){setTheme(root.getAttribute('data-theme')==='dark'?'system':'dark')});
+})();
+</script>
+</body>
+</html>
