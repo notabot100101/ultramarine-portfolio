@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Was Paul macht — Familienvorstellung</title>
+<style>
+:root {
+  --bg: #0a0a0f;
+  --fg: #e0e0e0;
+  --accent: #00d4ff;
+  --accent2: #7ee8fa;
+  --card: rgba(255,255,255,0.05);
+  --muted: #888;
+}
+
+[data-theme="light"] {
+  --bg: #f5f5f7;
+  --fg: #1a1a2e;
+  --accent: #0066cc;
+  --accent2: #0099dd;
+  --card: rgba(0,0,0,0.05);
+  --muted: #666;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: system-ui, -apple-system, sans-serif;
+  background: var(--bg);
+  color: var(--fg);
+  overflow: hidden;
+  transition: background 0.3s, color 0.3s;
+}
+
+.controls {
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  display: flex;
+  gap: 0.5rem;
+  z-index: 100;
+}
+
+.btn-icon {
+  background: var(--card);
+  border: 1px solid var(--accent);
+  color: var(--accent);
+  padding: 0.5rem 0.8rem;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn-icon:hover { background: var(--accent); color: var(--bg); }
+
+.slide {
+  display: none;
+  min-height: 100vh;
+  padding: 4rem 1.5rem 5rem;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  animation: fadeIn 0.5s ease;
+}
+.slide.active { display: flex; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
+h1 { font-size: 2rem; margin-bottom: 1rem; color: var(--accent); }
+h2 { font-size: 1.6rem; margin-bottom: 1rem; color: var(--accent2); }
+p { font-size: 1.1rem; line-height: 1.6; max-width: 340px; margin-bottom: 1rem; }
+.icon { font-size: 4rem; margin-bottom: 1rem; }
+.number { font-size: 3rem; font-weight: bold; color: var(--accent); }
+.label { font-size: 0.9rem; color: var(--muted); margin-top: 0.5rem; }
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; max-width: 340px; margin: 1rem auto; }
+.card { background: var(--card); border-radius: 12px; padding: 1rem; transition: background 0.3s; }
+.card .emoji { font-size: 2rem; }
+.card .text { font-size: 0.85rem; margin-top: 0.5rem; }
+.nav {
+  position: fixed;
+  bottom: 0; left: 0; right: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  background: rgba(0,0,0,0.8);
+  backdrop-filter: blur(10px);
+}
+[data-theme="light"] .nav { background: rgba(255,255,255,0.9); }
+.btn {
+  background: var(--accent);
+  color: var(--bg);
+  border: none;
+  padding: 0.8rem 1.5rem;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+}
+.btn:disabled { opacity: 0.3; }
+.dots { display: flex; gap: 8px; }
+.dot { width: 8px; height: 8px; border-radius: 50%; background: #333; transition: background 0.3s; }
+[data-theme="light"] .dot { background: #ccc; }
+.dot.active { background: var(--accent); }
+.highlight { color: var(--accent); font-weight: bold; }
+.small { font-size: 0.85rem; color: var(--muted); }
+.hidden { display: none !important; }
+</style>
+</head>
+<body>
+
+<div class="controls">
+  <button class="btn-icon" onclick="toggleTheme()" title="Dark/Light">🌓</button>
+  <button class="btn-icon" onclick="toggleLang()" title="DE/EN">🇩🇪/🇬🇧</button>
+</div>
+
+<!-- ===== GERMAN SLIDES ===== -->
+<div id="slides-de">
+
+<div class="slide active" data-slide="1">
+  <div class="icon">🚀</div>
+  <h1>Was Paul gerade baut</h1>
+  <p>Ein kleines Imperium aus KI, Trading und Content — automatisiert und skalierbar.</p>
+  <p class="small">Wischen oder klicken →</p>
+</div>
+
+<div class="slide" data-slide="2">
+  <div class="icon">🤖</div>
+  <h2>Mein KI-Fleet</h2>
+  <p>Statt einzelner Tools habe ich ein <span class="highlight">Team von KI-Agenten</span>, die rund um die Uhr arbeiten:</p>
+  <div class="grid-2">
+    <div class="card"><div class="emoji">📈</div><div class="text">Trading-Bots handeln Krypto automatisch</div></div>
+    <div class="card"><div class="emoji">📚</div><div class="text">Bücher werden geschrieben und auf Amazon veröffentlicht</div></div>
+    <div class="card"><div class="emoji">🌐</div><div class="text">Webseiten entstehen und pflegen sich selbst</div></div>
+    <div class="card"><div class="emoji">📱</div><div class="text">Social Media Posts gehen automatisch live</div></div>
+  </div>
+</div>
+
+<div class="slide" data-slide="3">
+  <div class="icon">📊</div>
+  <h2>Trading — ohne Stress</h2>
+  <p>Ein Bot handelt <span class="highlight">Ethereum (ETHEUR)</span> nach einem klaren Plan:</p>
+  <div class="number">~30€</div>
+  <div class="label">eingesetztes Kapital, wächst stetig</div>
+  <p class="small">Kauft niedrig, verkauft hoch — vollautomatisch, 24/7.</p>
+</div>
+
+<div class="slide" data-slide="4">
+  <div class="icon">📖</div>
+  <h2>Bücher auf Amazon</h2>
+  <p>Ich veröffentliche Bücher über <span class="highlight">Kindle Direct Publishing</span>:</p>
+  <div class="grid-2">
+    <div class="card"><div class="emoji">🎄</div><div class="text">Advents-Malbücher für Kinder</div></div>
+    <div class="card"><div class="emoji">🐾</div><div class="text">"Pip and the Birthday Surprise"</div></div>
+  </div>
+  <p class="small">KI hilft bei Illustrationen, Layout und Marketing.</p>
+</div>
+
+<div class="slide" data-slide="5">
+  <div class="icon">🌟</div>
+  <h2>Webseiten & Kunden</h2>
+  <p>Ich baue eine <span class="highlight">Full-Service-Agentur</span> auf:</p>
+  <p>• ultramarine963.com — meine Hauptseite<br>
+     • aiffiliation.de — IT-Sicherheit für Firmen<br>
+     • venusreviews.net — Produktbewertungen</p>
+  <p class="small">Plus Social Media auf Mastodon, Bluesky und LinkedIn.</p>
+</div>
+
+<div class="slide" data-slide="6">
+  <div class="icon">🎯</div>
+  <h2>Die Vision</h2>
+  <p>Alles zusammen ergibt ein <span class="highlight">selbsttragendes System</span>:</p>
+  <p>Trading finanziert die Projekte.<br>
+     Bücher bringen passives Einkommen.<br>
+     Webseiten gewinnen Kunden.<br>
+     KI-Agenten machen den Großteil der Arbeit.</p>
+  <p style="margin-top:1.5rem; color:var(--accent2); font-weight:bold;">Das Ziel: Finanzielle Unabhängigkeit durch smarte Automatisierung.</p>
+</div>
+
+</div>
+
+<!-- ===== ENGLISH SLIDES ===== -->
+<div id="slides-en" class="hidden">
+
+<div class="slide active" data-slide="1">
+  <div class="icon">🚀</div>
+  <h1>What Paul is Building</h1>
+  <p>A small empire of AI, trading, and content — automated and scalable.</p>
+  <p class="small">Swipe or click →</p>
+</div>
+
+<div class="slide" data-slide="2">
+  <div class="icon">🤖</div>
+  <h2>My AI Fleet</h2>
+  <p>Instead of single tools, I have a <span class="highlight">team of AI agents</span> working around the clock:</p>
+  <div class="grid-2">
+    <div class="card"><div class="emoji">📈</div><div class="text">Trading bots buy and sell crypto automatically</div></div>
+    <div class="card"><div class="emoji">📚</div><div class="text">Books are written and published on Amazon</div></div>
+    <div class="card"><div class="emoji">🌐</div><div class="text">Websites build and maintain themselves</div></div>
+    <div class="card"><div class="emoji">📱</div><div class="text">Social media posts go live automatically</div></div>
+  </div>
+</div>
+
+<div class="slide" data-slide="3">
+  <div class="icon">📊</div>
+  <h2>Trading — No Stress</h2>
+  <p>A bot trades <span class="highlight">Ethereum (ETHEUR)</span> with a clear plan:</p>
+  <div class="number">~30€</div>
+  <div class="label">deployed capital, growing steadily</div>
+  <p class="small">Buys low, sells high — fully automated, 24/7.</p>
+</div>
+
+<div class="slide" data-slide="4">
+  <div class="icon">📖</div>
+  <h2>Books on Amazon</h2>
+  <p>I publish books via <span class="highlight">Kindle Direct Publishing</span>:</p>
+  <div class="grid-2">
+    <div class="card"><div class="emoji">🎄</div><div class="text">Advent coloring books for kids</div></div>
+    <div class="card"><div class="emoji">🐾</div><div class="text">"Pip and the Birthday Surprise"</div></div>
+  </div>
+  <p class="small">AI helps with illustrations, layout, and marketing.</p>
+</div>
+
+<div class="slide" data-slide="5">
+  <div class="icon">🌟</div>
+  <h2>Websites & Clients</h2>
+  <p>I'm building a <span class="highlight">full-service agency</span>:</p>
+  <p>• ultramarine963.com — my main site<br>
+     • aiffiliation.de — IT security for businesses<br>
+     • venusreviews.net — product reviews</p>
+  <p class="small">Plus social media on Mastodon, Bluesky, and LinkedIn.</p>
+</div>
+
+<div class="slide" data-slide="6">
+  <div class="icon">🎯</div>
+  <h2>The Vision</h2>
+  <p>Everything together becomes a <span class="highlight">self-sustaining system</span>:</p>
+  <p>Trading funds the projects.<br>
+     Books bring passive income.<br>
+     Websites win clients.<br>
+     AI agents do most of the work.</p>
+  <p style="margin-top:1.5rem; color:var(--accent2); font-weight:bold;">Goal: Financial independence through smart automation.</p>
+</div>
+
+</div>
+
+<div class="nav">
+  <button class="btn" id="prevBtn" onclick="changeSlide(-1)">←</button>
+  <div class="dots" id="dots"></div>
+  <button class="btn" id="nextBtn" onclick="changeSlide(1)">→</button>
+</div>
+
+<script>
+let current = 1;
+const total = 6;
+let lang = 'de';
+
+function showSlide(n) {
+  const container = document.getElementById('slides-' + lang);
+  container.querySelectorAll('.slide').forEach(s => s.classList.remove('active'));
+  const target = container.querySelector('[data-slide="' + n + '"]');
+  if (target) target.classList.add('active');
+  
+  document.getElementById('prevBtn').disabled = (n === 1);
+  document.getElementById('nextBtn').disabled = (n === total);
+  
+  document.querySelectorAll('.dot').forEach((d, i) => {
+    d.classList.toggle('active', i + 1 === n);
+  });
+}
+
+function changeSlide(dir) {
+  current += dir;
+  if (current < 1) current = 1;
+  if (current > total) current = total;
+  showSlide(current);
+}
+
+function toggleLang() {
+  const deSlides = document.getElementById('slides-de');
+  const enSlides = document.getElementById('slides-en');
+  if (lang === 'de') {
+    lang = 'en';
+    deSlides.classList.add('hidden');
+    enSlides.classList.remove('hidden');
+  } else {
+    lang = 'de';
+    enSlides.classList.add('hidden');
+    deSlides.classList.remove('hidden');
+  }
+  current = 1;
+  showSlide(1);
+}
+
+function toggleTheme() {
+  const html = document.documentElement;
+  const current = html.getAttribute('data-theme');
+  html.setAttribute('data-theme', current === 'light' ? 'dark' : 'light');
+}
+
+document.addEventListener('touchstart', e => { touchStart = e.changedTouches[0].screenX; });
+document.addEventListener('touchend', e => {
+  let touchEnd = e.changedTouches[0].screenX;
+  if (touchStart - touchEnd > 50) changeSlide(1);
+  if (touchEnd - touchStart > 50) changeSlide(-1);
+});
+
+for (let i = 1; i <= total; i++) {
+  let dot = document.createElement('div');
+  dot.className = 'dot' + (i === 1 ? ' active' : '');
+  document.getElementById('dots').appendChild(dot);
+}
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'ArrowRight') changeSlide(1);
+  if (e.key === 'ArrowLeft') changeSlide(-1);
+});
+
+showSlide(1);
+</script>
+</body>
+</html>
