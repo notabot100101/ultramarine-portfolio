@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pauls Bücher — Vergleich</title>
+<meta name="description" content="Übersicht der aktuellen Bücher von Paul Budzisch — KDP Kindle Direct Publishing.">
+<link rel="canonical" href="https://ultramarine963.com/books.html">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<style>
+:root{
+  --ink:#16181d; --muted:#5a6170; --bg:#fafbfd; --card:#ffffff;
+  --ultra:#1f2fa6; --ultra-deep:#121a6e; --line:#e4e7ee;
+  --accent:#0066cc; --accent2:#0099dd;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);
+  font:17px/1.65 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif}
+.wrap{max-width:960px;margin:0 auto;padding:0 20px}
+
+header{padding:20px 0;border-bottom:1px solid var(--line);background:var(--card)}
+header .wrap{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px}
+.mark{font-weight:800;letter-spacing:.04em;text-decoration:none;color:var(--ink);font-size:18px}
+.mark span{color:var(--ultra)}
+nav a{color:var(--muted);text-decoration:none;margin-left:18px;font-size:15px}
+nav a:hover{color:var(--ultra)}
+
+.hero{padding:48px 0 32px;text-align:center}
+.hero h1{font-size:clamp(28px,5vw,42px);line-height:1.15;margin:0 0 12px;letter-spacing:-.02em}
+.hero p{max-width:520px;color:var(--muted);margin:0 auto;font-size:18px}
+
+.books-grid{display:grid;gap:24px;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));margin-top:32px}
+.book{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:24px;display:flex;flex-direction:column;align-items:center;text-align:center;box-shadow:0 6px 18px rgba(0,0,0,0.04)}
+.book .cover-wrap{width:100%;max-width:220px;aspect-ratio:5/6;overflow:hidden;border-radius:10px;margin-bottom:16px;background:#f2f4f8}
+.book .cover-wrap img{width:100%;height:100%;object-fit:cover;object-position:right center;display:block}
+.book h3{margin:0 0 6px;font-size:1.15rem;color:var(--ultra-deep)}
+.book .tag{font-size:12px;text-transform:uppercase;letter-spacing:.08em;color:var(--ultra);font-weight:700;margin-bottom:10px}
+.book p{margin:0 0 14px;color:var(--muted);font-size:15px;flex:1}
+.book .meta{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin-bottom:12px}
+.pill{font-size:12px;font-weight:600;color:var(--ultra-deep);background:#eef1fb;border:1px solid #dce3f7;padding:4px 10px;border-radius:999px}
+.book .foot{margin-top:auto;width:100%;border-top:1px solid var(--line);padding-top:14px}
+.book .price{font-weight:700;font-size:1.1rem;color:var(--ultra-deep)}
+.book .status{font-size:13px;color:var(--muted);margin-top:4px}
+
+.comparison-bar{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:22px 24px;margin-top:32px}
+.comparison-bar h2{font-size:20px;margin:0 0 16px}
+.comparison-row{display:grid;grid-template-columns:1.2fr 1fr 1fr 1fr;gap:12px;align-items:center;padding:8px 0;border-bottom:1px solid var(--line);font-size:14px}
+.comparison-row:last-child{border-bottom:none}
+.comparison-row.head{font-weight:700;color:var(--muted);font-size:13px;text-transform:uppercase;letter-spacing:.04em;border-bottom:2px solid var(--line)}
+
+footer{border-top:1px solid var(--line);margin-top:48px;padding:28px 0;color:var(--muted);font-size:14px;text-align:center}
+footer a{color:var(--muted)}
+footer a:hover{color:var(--ultra)}
+
+@media(max-width:720px){
+  .comparison-row{grid-template-columns:1fr 1fr}
+  .comparison-row.head{display:none}
+  .comparison-row>span{display:flex;justify-content:space-between}
+  .comparison-row>span::before{content:attr(data-label);font-weight:700;color:var(--muted)}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <a class="mark" href="index.html">ULTRAMARINE<span>963</span></a>
+    <nav>
+      <a href="family.html">Family</a>
+      <a href="books.html">Books</a>
+      <a href="index.html#kontakt">Kontakt</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="hero">
+    <div class="wrap">
+      <h1>Aktuelle Bücher</h1>
+      <p>Ein Überblick über die aktuellen Kinderbücher, die ich über Kindle Direct Publishing veröffentliche.</p>
+    </div>
+  </section>
+
+  <section class="wrap">
+    <div class="books-grid">
+      <article class="book">
+        <div class="cover-wrap">
+          <img src="assets/cover-pip-coloring.png" alt="Pip and Friends Coloring Book">
+        </div>
+        <div class="tag">Malbuch</div>
+        <h3>Pip and Friends Coloring Book</h3>
+        <p>24 große, einfache Szenen mit extra-dicken Linien — perfekt für kleine Hände. Pip der Hase und seine Freunde zum Ausmalen aus den Storybooks.</p>
+        <div class="meta">
+          <span class="pill">54 Seiten</span>
+          <span class="pill">8,5 × 11 in</span>
+          <span class="pill">Single-sided</span>
+        </div>
+        <div class="foot">
+          <div class="price">$9,99</div>
+          <div class="status">Staging abgeschlossen — Upload ready</div>
+        </div>
+      </article>
+
+      <article class="book">
+        <div class="cover-wrap">
+          <img src="assets/cover-advent.png" alt="The Great Forest Christmas Party">
+        </div>
+        <div class="tag">Advents-Malbuch</div>
+        <h3>The Great Forest Christmas Party</h3>
+        <p>Ein Advents-Ausmal-Countdown — eine gemütliche Wintertier-Seite pro Tag bis Weihnachten. Ein ruhiger, bildschirmfreier Ritual für den stressigsten Monat.</p>
+        <div class="meta">
+          <span class="pill">24 tägliche Seiten</span>
+          <span class="pill">8,5 × 11 in</span>
+          <span class="pill">Ages 4–8</span>
+        </div>
+        <div class="foot">
+          <div class="price">$9,99</div>
+          <div class="status">Veröffentlicht auf Amazon KDP</div>
+        </div>
+      </article>
+
+      <article class="book">
+        <div class="cover-wrap">
+          <img src="assets/cover-birthday-surprise.png" alt="Pip and the Birthday Surprise">
+        </div>
+        <div class="tag">Level-2-Leser</div>
+        <h3>Pip and the Birthday Surprise</h3>
+        <p>Der nächste Schritt für Kinder, die erste Leser abgeschlossen haben. 2–3 kurze Sätze pro Seite, einfacher Dialog, ein Bild für jede Zeile.</p>
+        <div class="meta">
+          <span class="pill">22 Seiten</span>
+          <span class="pill">8,5 × 8,5 in</span>
+          <span class="pill">Premium Color</span>
+        </div>
+        <div class="foot">
+          <div class="price">$10,99</div>
+          <div class="status">Gestaged auf KDP — Publish-Button bereit</div>
+        </div>
+      </article>
+    </div>
+
+    <div class="comparison-bar">
+      <h2>Schnellvergleich</h2>
+      <div class="comparison-row head">
+        <span>Merkmal</span>
+        <span>Pip &amp; Friends Coloring</span>
+        <span>Advent Coloring</span>
+        <span>Birthday Surprise</span>
+      </div>
+      <div class="comparison-row">
+        <span data-label="Merkmal">Format</span>
+        <span data-label="Pip &amp; Friends">Malbuch</span>
+        <span data-label="Advent">Malbuch</span>
+        <span data-label="Birthday">Erstleser</span>
+      </div>
+      <div class="comparison-row">
+        <span data-label="Merkmal">Seiten</span>
+        <span data-label="Pip &amp; Friends">54</span>
+        <span data-label="Advent">24</span>
+        <span data-label="Birthday">26</span>
+      </div>
+      <div class="comparison-row">
+        <span data-label="Merkmal">Trim</span>
+        <span data-label="Pip &amp; Friends">8,5 × 11 in</span>
+        <span data-label="Advent">8,5 × 11 in</span>
+        <span data-label="Birthday">8,5 × 8,5 in</span>
+      </div>
+      <div class="comparison-row">
+        <span data-label="Merkmal">Preis</span>
+        <span data-label="Pip &amp; Friends">$9,99</span>
+        <span data-label="Advent">$9,99</span>
+        <span data-label="Birthday">$10,99</span>
+      </div>
+      <div class="comparison-row">
+        <span data-label="Merkmal">Status</span>
+        <span data-label="Pip &amp; Friends">Upload ready</span>
+        <span data-label="Advent">Live</span>
+        <span data-label="Birthday">Staging fertig</span>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <p><a href="impressum.html">Impressum</a> · <a href="datenschutz.html">Datenschutz</a></p>
+    <p>&copy; 2026 Paul Budzisch. Hopfield Books — ein unabhängiges Imprint.</p>
+  </div>
+</footer>
+</body>
+</html>
