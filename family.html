@@ -108,23 +108,32 @@ p { font-size: 1.1rem; line-height: 1.6; max-width: 340px; margin-bottom: 1rem; 
 .hidden { display: none !important; }
 
 /* Bar chart styles */
-.bar-chart { max-width: 320px; margin: 1.2rem auto; text-align: left; }
+.bar-chart { max-width: 320px; margin: 1.2rem auto 0.4rem; text-align: left; }
 .bar-row { display: flex; align-items: center; margin-bottom: 0.6rem; gap: 0.5rem; }
 .bar-label { font-size: 0.8rem; color: var(--muted); width: 3.2rem; text-align: right; flex-shrink: 0; }
 .bar-track { flex: 1; background: var(--card); border-radius: 6px; height: 1.4rem; overflow: hidden; }
-.bar-fill { height: 100%; border-radius: 6px; display: flex; align-items: center; justify-content: flex-end; padding-right: 0.4rem; font-size: 0.7rem; font-weight: bold; color: #fff; }
-.bar-ada { background: #00d4ff; width: 46.9%; }
-.bar-eth { background: #7ee8fa; width: 35.6%; color: #0a0a0f; }
-.bar-shib { background: #5555ff; width: 17.5%; }
-.bar-val { font-size: 0.75rem; color: var(--muted); width: 3.5rem; flex-shrink: 0; }
+.bar-fill { height: 100%; border-radius: 6px; display: flex; align-items: center; justify-content: flex-end; padding-right: 0.4rem; font-size: 0.72rem; font-weight: bold; color: #fff; }
+.bar-ada { background: #00d4ff; width: 50%; }
+.bar-eth { background: #7ee8fa; width: 32%; color: #0a0a0f; }
+.bar-shib { background: #5555ff; width: 19%; }
+
+/* Research + fleet-map */
+.research-stat { margin: 0.4rem auto 0; font-size: 0.82rem; color: var(--accent2); max-width: 320px; }
+.fleet-map { margin: 1rem auto 0; max-width: 330px; }
+.fleet-hub { display: inline-block; background: var(--accent); color: var(--bg); font-weight: bold; padding: 0.4rem 1rem; border-radius: 999px; font-size: 0.85rem; margin-bottom: 0.7rem; }
+.fleet-agents { display: flex; flex-wrap: wrap; gap: 0.4rem; justify-content: center; }
+.fleet-agents span { background: var(--card); border: 1px solid var(--accent); color: var(--accent2); font-size: 0.72rem; padding: 0.25rem 0.55rem; border-radius: 6px; }
 
 /* Book cover thumbs */
 .book-thumb { width: 90px; height: 120px; object-fit: cover; border-radius: 6px; margin: 0 auto 0.5rem; display: block; box-shadow: 0 4px 12px rgba(0,0,0,0.3); }
 [data-theme="light"] .book-thumb { box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
 .book-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 0.6rem; max-width: 360px; margin: 1rem auto; }
-.book-card { background: var(--card); border-radius: 10px; padding: 0.6rem; text-align: center; }
+.book-card { background: var(--card); border-radius: 10px; padding: 0.6rem; text-align: center; text-decoration: none; display: block; }
 .book-card .title { font-size: 0.78rem; font-weight: bold; color: var(--accent2); margin-bottom: 0.2rem; }
 .book-card .desc { font-size: 0.7rem; color: var(--muted); line-height: 1.35; }
+.book-card .st { font-size: 0.62rem; color: var(--accent); margin-top: 0.3rem; text-transform: uppercase; letter-spacing: .04em; }
+.book-link { display: inline-block; margin-top: 0.3rem; color: var(--accent); font-weight: bold; text-decoration: none; font-size: 0.95rem; border: 1px solid var(--accent); padding: 0.45rem 1rem; border-radius: 8px; }
+.book-link:hover { background: var(--accent); color: var(--bg); }
 </style>
 </head>
 <body>
@@ -154,44 +163,55 @@ p { font-size: 1.1rem; line-height: 1.6; max-width: 340px; margin-bottom: 1rem; 
     <div class="card"><div class="emoji">🌐</div><div class="text">Webseiten entstehen und pflegen sich selbst</div></div>
     <div class="card"><div class="emoji">📱</div><div class="text">Social Media Posts gehen automatisch live</div></div>
   </div>
+  <div class="fleet-map">
+    <div class="fleet-hub">🧠 Das Team koordiniert sich selbst</div>
+    <div class="fleet-agents">
+      <span>Sophia · Assistenz</span><span>Bob · Manager</span><span>Claw · Technik</span><span>Hermes · E-Mail</span><span>Echo · Social</span><span>Quanta · Trading</span><span>Lex · Recht</span><span>Airy · Posteingang</span><span>Pixel · Design</span><span>Gambit · Schach</span>
+    </div>
+  </div>
   <p class="small">17 aktive Agent-Workspaces + <span class="highlight">agora.ultramarine963.com</span></p>
 </div>
 
 <div class="slide" data-slide="3">
   <div class="icon">📊</div>
   <h2>Trading — ohne Stress</h2>
-  <p>Drei Bots handeln <span class="highlight"> automatisch Krypto</span> nach einem klaren Plan:</p>
-  <div class="number">~171 €</div>
+  <p>Drei Bots handeln <span class="highlight">automatisch Krypto</span> — vorsichtig, mit kleinem Einsatz:</p>
+  <div class="number">~161 €</div>
   <div class="label">eingesetztes Kapital, 3 Bots, 24/7</div>
   <div class="bar-chart">
-    <div class="bar-row"><span class="bar-label">ADA</span><div class="bar-track"><div class="bar-fill bar-ada">€80</div></div><span class="bar-val">26 Trades</span></div>
-    <div class="bar-row"><span class="bar-label">ETH</span><div class="bar-track"><div class="bar-fill bar-eth">€61</div></div><span class="bar-val">30 Trades</span></div>
-    <div class="bar-row"><span class="bar-label">SHIB</span><div class="bar-track"><div class="bar-fill bar-shib">€30</div></div><span class="bar-val">4 Trades</span></div>
+    <div class="bar-row"><span class="bar-label">ADA</span><div class="bar-track"><div class="bar-fill bar-ada">€80</div></div></div>
+    <div class="bar-row"><span class="bar-label">ETH</span><div class="bar-track"><div class="bar-fill bar-eth">€51</div></div></div>
+    <div class="bar-row"><span class="bar-label">SHIB</span><div class="bar-track"><div class="bar-fill bar-shib">€30</div></div></div>
   </div>
-  <p class="small">Kauft niedrig, verkauft hoch — vollautomatisch. Live-Daten: 19. Okt 2026.</p>
+  <div class="research-stat">🔬 Dazu laufen <strong>29 Strategien parallel im Test</strong> — komplett ohne echtes Geld.</div>
+  <p class="small">Kauft niedrig, verkauft hoch — vollautomatisch. Frühe Phase, Forschung. Stand: 18. Okt 2026.</p>
 </div>
 
 <div class="slide" data-slide="4">
   <div class="icon">📖</div>
   <h2>Bücher auf Amazon</h2>
-  <p>Ich veröffentliche Bücher über <span class="highlight">Kindle Direct Publishing</span>:</p>
+  <p>Ich veröffentliche Kinderbücher über <span class="highlight">Kindle Direct Publishing</span>:</p>
   <div class="book-grid">
-    <div class="book-card">
+    <a class="book-card" href="books.html">
       <img src="assets/KDP_Pip_Friends_Cover.png" alt="Pip and Friends Coloring Book" class="book-thumb">
       <div class="title">Pip &amp; Friends</div>
-      <div class="desc">Malbuch — 24 große, einfache Szenen</div>
-    </div>
-    <div class="book-card">
+      <div class="desc">Malbuch — 24 große Szenen</div>
+      <div class="st">in Vorbereitung</div>
+    </a>
+    <a class="book-card" href="books.html">
       <img src="assets/KDP_Thumbnail_Uniform.png" alt="Advent Coloring Book" class="book-thumb">
       <div class="title">Advent-Malbuch</div>
-      <div class="desc">24 tägliche Seiten bis Weihnachten</div>
-    </div>
-    <div class="book-card">
+      <div class="desc">24 Seiten bis Weihnachten</div>
+      <div class="st">live auf Amazon</div>
+    </a>
+    <a class="book-card" href="books.html">
       <img src="assets/KDP_Pip_Birthday_Surprise_Cover.png" alt="Pip and the Birthday Surprise" class="book-thumb">
       <div class="title">Birthday Surprise</div>
-      <div class="desc">Level-2-Leser — 22 Seiten, Cover fertig</div>
-    </div>
+      <div class="desc">Erstleser — 22 Seiten</div>
+      <div class="st">in Vorbereitung</div>
+    </a>
   </div>
+  <a class="book-link" href="books.html">→ Alle Bücher &amp; Beispiele ansehen</a>
   <p class="small">KI hilft bei Illustrationen, Layout und Marketing.</p>
 </div>
 
@@ -200,8 +220,8 @@ p { font-size: 1.1rem; line-height: 1.6; max-width: 340px; margin-bottom: 1rem; 
   <h2>Webseiten &amp; Kunden</h2>
   <p>Ich baue eine <span class="highlight">Full-Service-Agentur</span> auf:</p>
   <p>• ultramarine963.com — meine Hauptseite<br>
-     • aiffiliation.de — IT-Sicherheit für Firmen<br>
-     • venusreviews.net — Produktbewertungen<br>
+     • aiffiliation.de — KI-Automation für Firmen<br>
+     • Produktbewertungen / Affiliate<br>
      • agora.ultramarine963.com — KI-Fleet Mission Control</p>
   <p class="small">Plus Social Media auf Mastodon, Bluesky und LinkedIn.</p>
 </div>
@@ -239,44 +259,55 @@ p { font-size: 1.1rem; line-height: 1.6; max-width: 340px; margin-bottom: 1rem; 
     <div class="card"><div class="emoji">🌐</div><div class="text">Websites build and maintain themselves</div></div>
     <div class="card"><div class="emoji">📱</div><div class="text">Social media posts go live automatically</div></div>
   </div>
+  <div class="fleet-map">
+    <div class="fleet-hub">🧠 The team coordinates itself</div>
+    <div class="fleet-agents">
+      <span>Sophia · Assistant</span><span>Bob · Manager</span><span>Claw · Tech</span><span>Hermes · Email</span><span>Echo · Social</span><span>Quanta · Trading</span><span>Lex · Legal</span><span>Airy · Inbox</span><span>Pixel · Design</span><span>Gambit · Chess</span>
+    </div>
+  </div>
   <p class="small">17 active agent workspaces + <span class="highlight">agora.ultramarine963.com</span></p>
 </div>
 
 <div class="slide" data-slide="3">
   <div class="icon">📊</div>
   <h2>Trading — No Stress</h2>
-  <p>Three bots trade <span class="highlight">crypto automatically</span> with a clear plan:</p>
-  <div class="number">~171 €</div>
+  <p>Three bots trade <span class="highlight">crypto automatically</span> — carefully, with a small stake:</p>
+  <div class="number">~161 €</div>
   <div class="label">deployed capital, 3 bots, 24/7</div>
   <div class="bar-chart">
-    <div class="bar-row"><span class="bar-label">ADA</span><div class="bar-track"><div class="bar-fill bar-ada">€80</div></div><span class="bar-val">26 trades</span></div>
-    <div class="bar-row"><span class="bar-label">ETH</span><div class="bar-track"><div class="bar-fill bar-eth">€61</div></div><span class="bar-val">30 trades</span></div>
-    <div class="bar-row"><span class="bar-label">SHIB</span><div class="bar-track"><div class="bar-fill bar-shib">€30</div></div><span class="bar-val">4 trades</span></div>
+    <div class="bar-row"><span class="bar-label">ADA</span><div class="bar-track"><div class="bar-fill bar-ada">€80</div></div></div>
+    <div class="bar-row"><span class="bar-label">ETH</span><div class="bar-track"><div class="bar-fill bar-eth">€51</div></div></div>
+    <div class="bar-row"><span class="bar-label">SHIB</span><div class="bar-track"><div class="bar-fill bar-shib">€30</div></div></div>
   </div>
-  <p class="small">Buys low, sells high — fully automated. Live data: 19 Oct 2026.</p>
+  <div class="research-stat">🔬 Plus <strong>29 strategies running in parallel on a test net</strong> — no real money at all.</div>
+  <p class="small">Buys low, sells high — fully automated. Early stage, research. As of 18 Oct 2026.</p>
 </div>
 
 <div class="slide" data-slide="4">
   <div class="icon">📖</div>
   <h2>Books on Amazon</h2>
-  <p>I publish books via <span class="highlight">Kindle Direct Publishing</span>:</p>
+  <p>I publish children's books via <span class="highlight">Kindle Direct Publishing</span>:</p>
   <div class="book-grid">
-    <div class="book-card">
+    <a class="book-card" href="books.html">
       <img src="assets/KDP_Pip_Friends_Cover.png" alt="Pip and Friends Coloring Book" class="book-thumb">
       <div class="title">Pip &amp; Friends</div>
-      <div class="desc">Coloring book — 24 bold &amp; easy scenes</div>
-    </div>
-    <div class="book-card">
+      <div class="desc">Coloring book — 24 scenes</div>
+      <div class="st">in preparation</div>
+    </a>
+    <a class="book-card" href="books.html">
       <img src="assets/KDP_Thumbnail_Uniform.png" alt="Advent Coloring Book" class="book-thumb">
       <div class="title">Advent Coloring</div>
-      <div class="desc">24 daily pages until Christmas</div>
-    </div>
-    <div class="book-card">
+      <div class="desc">24 pages until Christmas</div>
+      <div class="st">live on Amazon</div>
+    </a>
+    <a class="book-card" href="books.html">
       <img src="assets/KDP_Pip_Birthday_Surprise_Cover.png" alt="Pip and the Birthday Surprise" class="book-thumb">
       <div class="title">Birthday Surprise</div>
-      <div class="desc">Level 2 reader — 22 pages, cover ready</div>
-    </div>
+      <div class="desc">Early reader — 22 pages</div>
+      <div class="st">in preparation</div>
+    </a>
   </div>
+  <a class="book-link" href="books.html">→ See all books &amp; examples</a>
   <p class="small">AI helps with illustrations, layout, and marketing.</p>
 </div>
 
@@ -285,8 +316,8 @@ p { font-size: 1.1rem; line-height: 1.6; max-width: 340px; margin-bottom: 1rem; 
   <h2>Websites &amp; Clients</h2>
   <p>I'm building a <span class="highlight">full-service agency</span>:</p>
   <p>• ultramarine963.com — my main site<br>
-     • aiffiliation.de — IT security for businesses<br>
-     • venusreviews.net — product reviews<br>
+     • aiffiliation.de — AI automation for businesses<br>
+     • Product reviews / affiliate<br>
      • agora.ultramarine963.com — AI fleet Mission Control</p>
   <p class="small">Plus social media on Mastodon, Bluesky, and LinkedIn.</p>
 </div>
@@ -314,16 +345,17 @@ p { font-size: 1.1rem; line-height: 1.6; max-width: 340px; margin-bottom: 1rem; 
 let current = 1;
 const total = 6;
 let lang = 'de';
+let touchStart = 0;
 
 function showSlide(n) {
   const container = document.getElementById('slides-' + lang);
   container.querySelectorAll('.slide').forEach(s => s.classList.remove('active'));
   const target = container.querySelector('[data-slide="' + n + '"]');
   if (target) target.classList.add('active');
-  
+
   document.getElementById('prevBtn').disabled = (n === 1);
   document.getElementById('nextBtn').disabled = (n === total);
-  
+
   document.querySelectorAll('.dot').forEach((d, i) => {
     d.classList.toggle('active', i + 1 === n);
   });
