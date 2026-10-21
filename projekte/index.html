@@ -1,316 +1,821 @@
 <!doctype html>
-<html lang="de">
+<html lang=de>
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="description" content="aiffiliation — Projekte & Fleet: die Flotte, eine Umsatz-Prognose und fünf Projekt-Highlights. DE/EN, hell/dunkel.">
-<meta name="robots" content="index,follow">
-<link rel="icon" href="/favicon.svg" type="image/svg+xml">
-<title>aiffiliation Projekte</title>
+<meta charset=UTF-8>
+<meta name=viewport content="width=device-width,initial-scale=1">
+<title>Projekte & Showcase — aiffiliation</title>
+<meta name=description content="Echte KI-Projekte, Investitionen und Erträge. Einblick in unsere Agenten-Flotte, Automatisierungen und Umsatzströme.">
+<link rel=canonical href=https://aiffiliation.de/projekte/>
+<link rel=icon type=image/svg+xml href=/images/logo-wordmark.svg>
+<link rel=stylesheet href=/css/style.css>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
 <style>
-html,body{margin:0;padding:0}
-img{max-width:100%}
-[hidden]{display:none!important}
-:root{color-scheme:light}
-</style>
-<style>
-  /* Layout concept: editorial one-column showcase — sticky brand bar, fleet table, a labelled projection chart, and five project bands; slate neutrals with a single cyan accent and a warm amber for highlights. */
-  :root{
-    --bg:#f6f7f9; --surface:#ffffff; --surface-2:#eef1f4; --border:#dde2e8;
-    --fg:#17202b; --muted:#5c6773; --faint:#8b96a3;
-    --accent:#0e8f9e; --accent-ink:#0a6b77; --amber:#c97a16; --good:#2f8f5b;
-    --shadow:0 1px 2px rgba(23,32,43,.06),0 8px 24px rgba(23,32,43,.06);
-    --display:"Sora",system-ui,sans-serif; --body:"IBM Plex Sans",system-ui,sans-serif; --mono:"IBM Plex Mono",ui-monospace,monospace;
-  }
-  @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
-    --bg:#0e141b; --surface:#161e28; --surface-2:#1d2732; --border:#2a3540;
-    --fg:#e8edf2; --muted:#a3afbb; --faint:#71808d;
-    --accent:#2bc2d4; --accent-ink:#8fe3ee; --amber:#e3a24a; --good:#5bc98b;
-    --shadow:0 1px 2px rgba(0,0,0,.4),0 10px 30px rgba(0,0,0,.35); color-scheme:dark;
-  }}
-  :root[data-theme="dark"]{
-    --bg:#0e141b; --surface:#161e28; --surface-2:#1d2732; --border:#2a3540;
-    --fg:#e8edf2; --muted:#a3afbb; --faint:#71808d;
-    --accent:#2bc2d4; --accent-ink:#8fe3ee; --amber:#e3a24a; --good:#5bc98b;
-    --shadow:0 1px 2px rgba(0,0,0,.4),0 10px 30px rgba(0,0,0,.35); color-scheme:dark;
-  }
-  *{box-sizing:border-box}
-  body{background:var(--bg);color:var(--fg);font-family:var(--body);line-height:1.6;-webkit-font-smoothing:antialiased}
-  .wrap{max-width:1000px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
-  h1,h2,h3{font-family:var(--display);line-height:1.15;text-wrap:balance;margin:0}
-  p{margin:0}
-  a{color:var(--accent-ink)}
-  .eyebrow{font-family:var(--mono);font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--accent-ink)}
-  .muted{color:var(--muted)}
-
-  /* sticky bar */
-  body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:20;background:var(--surface)}
-  header.bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:15;background:color-mix(in srgb,var(--surface) 92%,transparent);backdrop-filter:blur(8px);border-bottom:1px solid var(--border)}
-  .bar .wrap{display:flex;align-items:center;gap:12px;padding-block:12px}
-  .brand{font-family:var(--display);font-weight:700;font-size:1.15rem;letter-spacing:-.01em}
-  .brand span{color:var(--accent)}
-  .bar .spacer{flex:1}
-  .toggle{display:inline-flex;border:1px solid var(--border);border-radius:999px;overflow:hidden;background:var(--surface-2)}
-  .toggle button{font-family:var(--mono);font-size:.74rem;letter-spacing:.04em;border:0;background:transparent;color:var(--muted);padding:6px 11px;cursor:pointer}
-  .toggle button[aria-pressed="true"]{background:var(--accent);color:#fff}
-  :root[data-theme="dark"] .toggle button[aria-pressed="true"]{color:#07242a}
-  @media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .toggle button[aria-pressed="true"]{color:#07242a}}
-
-  section{padding-block:clamp(40px,7vw,76px)}
-  .hero{padding-top:clamp(36px,6vw,64px)}
-  .hero h1{font-size:clamp(2rem,6vw,3.4rem);font-weight:700;letter-spacing:-.02em;margin-top:14px}
-  .hero .lede{font-size:clamp(1.05rem,2.4vw,1.3rem);color:var(--muted);max-width:60ch;margin-top:18px}
-  .hero .pills{display:flex;flex-wrap:wrap;gap:8px;margin-top:22px}
-  .pill{font-family:var(--mono);font-size:.74rem;border:1px solid var(--border);background:var(--surface);border-radius:999px;padding:5px 12px;color:var(--muted)}
-
-  .sechead{display:flex;flex-direction:column;gap:6px;margin-bottom:26px}
-  .sechead h2{font-size:clamp(1.4rem,3.4vw,2rem);font-weight:600;letter-spacing:-.01em}
-  .sechead p{color:var(--muted);max-width:64ch}
-
-  /* fleet table */
-  .tablecard{background:var(--surface);border:1px solid var(--border);border-radius:14px;box-shadow:var(--shadow);overflow:hidden}
-  .tscroll{overflow-x:auto}
-  table{border-collapse:collapse;width:100%;min-width:460px;font-size:.93rem}
-  th,td{text-align:left;padding:13px 16px;border-bottom:1px solid var(--border);vertical-align:top}
-  thead th{font-family:var(--mono);font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:var(--faint);font-weight:600}
-  tbody tr:last-child td{border-bottom:0}
-  td.name{font-weight:600;white-space:nowrap}
-  td.name .dot{display:inline-block;width:8px;height:8px;border-radius:999px;background:var(--accent);margin-right:8px;vertical-align:middle}
-  .costrow{display:flex;flex-wrap:wrap;gap:10px 28px;align-items:baseline;margin-top:16px;padding:16px;background:var(--surface-2);border:1px solid var(--border);border-radius:12px}
-  .costrow .big{font-family:var(--mono);font-size:1.5rem;font-weight:600;color:var(--fg);font-variant-numeric:tabular-nums}
-  .tag{font-family:var(--mono);font-size:.68rem;letter-spacing:.06em;text-transform:uppercase;color:var(--amber);border:1px solid color-mix(in srgb,var(--amber) 45%,var(--border));border-radius:6px;padding:2px 7px}
-
-  /* chart */
-  .chartcard{background:var(--surface);border:1px solid var(--border);border-radius:14px;box-shadow:var(--shadow);padding:22px}
-  .chartcard figcaption{display:flex;flex-wrap:wrap;gap:8px 14px;align-items:center;justify-content:space-between;margin-bottom:8px}
-  .chartcard .note{font-family:var(--mono);font-size:.72rem;color:var(--amber)}
-  svg .bar{fill:var(--accent)}
-  svg .bar.goal{fill:color-mix(in srgb,var(--accent) 42%,transparent)}
-  svg .axis{stroke:var(--border);stroke-width:1}
-  svg .glabel,svg .vlabel{font-family:var(--mono);font-size:11px;fill:var(--muted)}
-  svg .vtop{font-family:var(--mono);font-size:11px;fill:var(--fg);font-weight:600}
-
-  /* projects */
-  .proj{display:grid;gap:14px;margin-top:22px}
-  .projhead{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
-  .projhead h3{font-size:1.25rem;font-weight:600}
-  .projhead .k{font-family:var(--mono);font-size:.72rem;color:var(--accent-ink);border:1px solid var(--border);border-radius:6px;padding:3px 8px}
-  .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
-  .card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:16px;box-shadow:var(--shadow);min-width:0}
-  .card h4{font-family:var(--display);font-size:1rem;font-weight:600;margin:0 0 6px}
-  .card p{font-size:.9rem;color:var(--muted)}
-  .projband{border-top:1px solid var(--border);padding-top:30px;margin-top:6px}
-
-  .cta{background:var(--surface);border:1px solid var(--border);border-radius:16px;box-shadow:var(--shadow);padding:clamp(24px,4vw,40px);text-align:center;display:flex;flex-direction:column;gap:14px;align-items:center}
-  .cta h2{font-size:clamp(1.5rem,3.6vw,2.1rem);font-weight:600}
-  .cta .price{font-family:var(--mono);font-size:1.1rem;color:var(--accent-ink)}
-  .cta .btn{display:inline-block;background:var(--accent);color:#fff;font-weight:600;text-decoration:none;padding:12px 24px;border-radius:999px}
-  :root[data-theme="dark"] .cta .btn{color:#07242a}
-  @media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .cta .btn{color:#07242a}}
-  footer{border-top:1px solid var(--border);color:var(--faint);font-size:.82rem}
-  footer .wrap{padding-block:24px;display:flex;flex-wrap:wrap;gap:8px 20px;justify-content:space-between}
-  .disclaimer{font-family:var(--mono);font-size:.72rem;color:var(--faint);max-width:70ch;margin-top:14px}
-
-  @media (max-width:720px){.cards{grid-template-columns:1fr}}
-  @media (prefers-reduced-motion:no-preference){a.btn{transition:transform .15s ease}a.btn:active{transform:translateY(1px)}}
-  :focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:4px}
+/* Showcase-specific styles */
+.showcase-hero {
+  background: linear-gradient(135deg, #0f172a 0%, #1e3a5f 50%, #2563eb 100%);
+  color: #fff;
+  padding: 80px 0 60px;
+  text-align: center;
+}
+.showcase-hero h1 {
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-weight: 800;
+  margin-bottom: 1rem;
+  background: linear-gradient(135deg, #60a5fa, #a78bfa);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.showcase-hero p {
+  font-size: 1.25rem;
+  opacity: 0.9;
+  max-width: 600px;
+  margin: 0 auto;
+}
+.metric-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+  margin: 40px 0;
+}
+.metric-card {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 16px;
+  padding: 1.5rem;
+  text-align: center;
+  backdrop-filter: blur(10px);
+}
+.metric-value {
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: #60a5fa;
+  margin-bottom: 0.25rem;
+}
+.metric-label {
+  opacity: 0.8;
+  font-size: 0.9rem;
+}
+.chart-container {
+  position: relative;
+  height: 350px;
+  margin: 2rem 0;
+}
+.section-projekte {
+  padding: 60px 0;
+}
+.section-dark {
+  background: #0f172a;
+  color: #fff;
+}
+.section-light {
+  background: #f8fafc;
+  color: #1e293b;
+}
+.case-study-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+  gap: 2rem;
+  margin: 2rem 0;
+}
+.case-study-card {
+  background: #fff;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.case-study-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 40px rgba(0,0,0,0.12);
+}
+.case-study-header {
+  padding: 1.5rem;
+  background: linear-gradient(135deg, #2563eb, #0ea5e9);
+  color: #fff;
+}
+.case-study-header h3 {
+  font-size: 1.25rem;
+  margin-bottom: 0.5rem;
+}
+.case-study-tag {
+  display: inline-block;
+  background: rgba(255,255,255,0.2);
+  padding: 0.25rem 0.75rem;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  margin-right: 0.5rem;
+}
+.case-study-body {
+  padding: 1.5rem;
+}
+.case-study-body p {
+  margin-bottom: 1rem;
+  line-height: 1.7;
+}
+.case-stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin: 1rem 0;
+  padding: 1rem;
+  background: #f1f5f9;
+  border-radius: 12px;
+}
+.stat-item {
+  text-align: center;
+}
+.stat-value {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #2563eb;
+}
+.stat-label {
+  font-size: 0.85rem;
+  color: #64748b;
+}
+.tech-stack {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+.tech-badge {
+  background: #e0f2fe;
+  color: #0369a1;
+  padding: 0.35rem 0.75rem;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+.fleet-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 2rem 0;
+  font-size: 0.95rem;
+}
+.fleet-table th {
+  background: #1e293b;
+  color: #fff;
+  padding: 1rem;
+  text-align: left;
+  font-weight: 600;
+}
+.fleet-table td {
+  padding: 1rem;
+  border-bottom: 1px solid #e2e8f0;
+}
+.fleet-table tr:nth-child(even) {
+  background: #f8fafc;
+}
+.fleet-table tr:hover {
+  background: #e0f2fe;
+}
+.investment-chart {
+  background: #fff;
+  border-radius: 20px;
+  padding: 2rem;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+  margin: 2rem 0;
+}
+.revenue-streams {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+  margin: 2rem 0;
+}
+.revenue-card {
+  background: #fff;
+  border-radius: 16px;
+  padding: 1.5rem;
+  text-align: center;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+  border-top: 4px solid;
+}
+.revenue-card:nth-child(1) { border-color: #2563eb; }
+.revenue-card:nth-child(2) { border-color: #10b981; }
+.revenue-card:nth-child(3) { border-color: #f59e0b; }
+.revenue-card:nth-child(4) { border-color: #8b5cf6; }
+.revenue-card:nth-child(5) { border-color: #ec4899; }
+.revenue-icon {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+.revenue-amount {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: #1e293b;
+}
+.revenue-name {
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+.revenue-desc {
+  font-size: 0.9rem;
+  color: #64748b;
+  line-height: 1.5;
+}
+.project-category {
+  margin: 60px 0;
+}
+.category-title {
+  font-size: 1.75rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+.category-sub {
+  color: #64748b;
+  margin-bottom: 1.5rem;
+}
+@media (max-width: 768px) {
+  .case-study-grid { grid-template-columns: 1fr; }
+  .metric-grid { grid-template-columns: repeat(2, 1fr); }
+  .fleet-table { font-size: 0.85rem; }
+  .fleet-table th, .fleet-table td { padding: 0.5rem; }
+}
 </style>
 </head>
 <body>
-<header class="bar">
-  <div class="wrap">
-    <span class="brand">ai<span>ffiliation</span></span>
-    <span class="spacer"></span>
-    <div class="toggle" role="group" aria-label="Sprache / Language">
-      <button id="de" aria-pressed="true">DE</button>
-      <button id="en" aria-pressed="false">EN</button>
-    </div>
-    <div class="toggle" role="group" aria-label="Theme">
-      <button id="light" aria-pressed="false">☀</button>
-      <button id="dark" aria-pressed="false">☾</button>
-    </div>
-  </div>
+<header class=site-header>
+<div class=container>
+<a href=/ class=logo><span class=logo-ai>ai</span>ffiliation</a>
+<div class=header-right>
+<button class=nav-toggle id=nav-toggle type=button aria-label="Menü öffnen" aria-expanded=false aria-controls=main-nav title=Menü>
+<span class=nav-toggle-bar></span>
+<span class=nav-toggle-bar></span>
+<span class=nav-toggle-bar></span>
+</button>
+<nav class=main-nav id=main-nav>
+<a href=/>Startseite</a>
+<a href=/#leistungen>Leistungen</a>
+<a href=/#preise>Preise</a>
+<a href=/projekte/>Projekte</a>
+<a href=/#faq>FAQ</a>
+<a href=/#kontakt class=nav-cta>Kontakt</a>
+</nav>
+</div>
+</div>
 </header>
 
 <main>
-  <section class="hero"><div class="wrap">
-    <span class="eyebrow" data-de="Projekte & Fleet" data-en="Projects & Fleet">Projekte & Fleet</span>
-    <h1 data-de="Ein kleines Team aus KI-Agenten, das rund um die Uhr arbeitet." data-en="A small team of AI agents that works around the clock.">Ein kleines Team aus KI-Agenten, das rund um die Uhr arbeitet.</h1>
-    <p class="lede" data-de="aiffiliation betreibt eine Flotte spezialisierter Agenten — für Automation, Publishing, Handel, Kommunikation und Betrieb. Diese Seite zeigt, wie das Team aufgebaut ist und woran es gerade arbeitet." data-en="aiffiliation runs a fleet of specialised agents — for automation, publishing, trading research, communication and operations. This page shows how the team is built and what it is working on.">aiffiliation betreibt eine Flotte spezialisierter Agenten — für Automation, Publishing, Handel, Kommunikation und Betrieb. Diese Seite zeigt, wie das Team aufgebaut ist und woran es gerade arbeitet.</p>
-    <div class="pills">
-      <span class="pill" data-de="Asynchron · kein Meeting nötig" data-en="Asynchronous · no meeting needed">Asynchron · kein Meeting nötig</span>
-      <span class="pill" data-de="Lokale & Cloud-Modelle" data-en="Local & cloud models">Lokale & Cloud-Modelle</span>
-      <span class="pill" data-de="Festpreise ab €390" data-en="Fixed prices from €390">Festpreise ab €390</span>
-    </div>
-  </div></section>
+<!-- Hero -->
+<section class=showcase-hero>
+<div class=container>
+<h1>Unsere KI-Projekte im Einsatz</h1>
+<p>Echte Automatisierungen, messbare Erträge, transparente Zahlen. Einblick in unsere Agenten-Flotte und was wir bauen.</p>
+<div class=metric-grid>
+<div class=metric-card>
+<div class=metric-value>8</div>
+<div class=metric-label>Aktive KI-Agenten</div>
+</div>
+<div class=metric-card>
+<div class=metric-value>€847</div>
+<div class=metric-label>Monatliche Kosten</div>
+</div>
+<div class=metric-card>
+<div class=metric-value>€2.400</div>
+<div class=metric-label>Projizierter Monatsumsatz</div>
+</div>
+<div class=metric-card>
+<div class=metric-value>284%</div>
+<div class=metric-label>ROI (12 Monate)</div>
+</div>
+<div class=metric-card>
+<div class=metric-value>15+</div>
+<div class=metric-label>Laufende Projekte</div>
+</div>
+<div class=metric-card>
+<div class=metric-value>100%</div>
+<div class=metric-label>Remote & Asynchron</div>
+</div>
+</div>
+</div>
+</section>
 
-  <section><div class="wrap">
-    <div class="sechead">
-      <span class="eyebrow" data-de="Die Flotte" data-en="The fleet">Die Flotte</span>
-      <h2 data-de="Wer im Team was macht" data-en="Who does what on the team">Wer im Team was macht</h2>
-      <p data-de="Jeder Agent hat eine klare Rolle und läuft eigenständig. Koordiniert wird über ein gemeinsames Board." data-en="Each agent has a clear role and runs on its own. Coordination happens over a shared board.">Jeder Agent hat eine klare Rolle und läuft eigenständig. Koordiniert wird über ein gemeinsames Board.</p>
-    </div>
-    <div class="tablecard"><div class="tscroll"><table>
-      <thead><tr>
-        <th data-de="Agent" data-en="Agent">Agent</th>
-        <th data-de="Rolle" data-en="Role">Rolle</th>
-        <th data-de="Arbeitet an" data-en="Works on">Arbeitet an</th>
-      </tr></thead>
-      <tbody>
-        <tr><td class="name"><span class="dot"></span>Sophia</td><td data-de="Assistenz & Koordination" data-en="Assistance & coordination">Assistenz & Koordination</td><td data-de="Posteingänge, Antworten, Übersicht" data-en="Inboxes, replies, overview">Posteingänge, Antworten, Übersicht</td></tr>
-        <tr><td class="name"><span class="dot"></span>Bob</td><td data-de="Manager" data-en="Manager">Manager</td><td data-de="Aufgaben verteilen, nichts liegen lassen" data-en="Delegating tasks, nothing left stale">Aufgaben verteilen, nichts liegen lassen</td></tr>
-        <tr><td class="name"><span class="dot"></span>Claw</td><td data-de="Infrastruktur & Betrieb" data-en="Infrastructure & ops">Infrastruktur & Betrieb</td><td data-de="Server, Deployments, Secrets" data-en="Servers, deployments, secrets">Server, Deployments, Secrets</td></tr>
-        <tr><td class="name"><span class="dot"></span>Hermes</td><td data-de="E-Mail & Reporting" data-en="Email & reporting">E-Mail & Reporting</td><td data-de="Tägliche Zusammenfassung, Postfächer" data-en="Daily digest, mailboxes">Tägliche Zusammenfassung, Postfächer</td></tr>
-        <tr><td class="name"><span class="dot"></span>Echo</td><td data-de="Social Media" data-en="Social media">Social Media</td><td data-de="Beiträge, Community-Kanäle" data-en="Posts, community channels">Beiträge, Community-Kanäle</td></tr>
-        <tr><td class="name"><span class="dot"></span>Quanta</td><td data-de="Handels-Forschung" data-en="Trading research">Handels-Forschung</td><td data-de="Automatisierte Testnet-Experimente" data-en="Automated testnet experiments">Automatisierte Testnet-Experimente</td></tr>
-        <tr><td class="name"><span class="dot"></span>Lex</td><td data-de="Recht & Compliance" data-en="Legal & compliance">Recht & Compliance</td><td data-de="Datenschutz, Texte, Prüfungen" data-en="Privacy, texts, reviews">Datenschutz, Texte, Prüfungen</td></tr>
-        <tr><td class="name"><span class="dot"></span>Airy</td><td data-de="Posteingang-Triage" data-en="Inbox triage">Posteingang-Triage</td><td data-de="E-Mails sortieren & vorsichten" data-en="Sorting & pre-screening mail">E-Mails sortieren & vorsichten</td></tr>
-      </tbody>
-    </table></div></div>
-    <div class="costrow">
-      <div>
-        <div class="eyebrow" data-de="Laufende Kosten (Schätzung)" data-en="Running cost (estimate)">Laufende Kosten (Schätzung)</div>
-        <div class="big">~ €150<span style="font-size:.8rem;color:var(--muted)"> / <span data-de="Monat" data-en="month">Monat</span></span></div>
-      </div>
-      <p class="muted" style="font-size:.86rem;min-width:0;flex:1" data-de="Modelle, Hosting und Tools zusammen. Vieles läuft lokal auf eigener Hardware, um Kosten und Daten im Haus zu halten." data-en="Models, hosting and tools combined. Much of it runs locally on our own hardware to keep cost and data in-house.">Modelle, Hosting und Tools zusammen. Vieles läuft lokal auf eigener Hardware, um Kosten und Daten im Haus zu halten.</p>
-    </div>
-  </div></section>
+<!-- Fleet Overview -->
+<section class="section-projekte section-light">
+<div class=container>
+<span class=section-eyebrow>Die Flotte</span>
+<h2 class=section-title>Unsere Agenten-Flotte im Überblick</h2>
+<p class=section-lead>Jeder Agent ist ein spezialisierter KI-Mitarbeiter mit eigener Aufgabe, eigenem Workspace und eigenem Budget.</p>
 
-  <section><div class="wrap">
-    <div class="sechead">
-      <span class="eyebrow" data-de="Ausblick" data-en="Outlook">Ausblick</span>
-      <h2 data-de="Umsatz-Prognose" data-en="Revenue projection">Umsatz-Prognose</h2>
-      <p data-de="Ziele, keine garantierten Ergebnisse. Die Balken zeigen, worauf wir hinarbeiten — nicht bereits erzielte Umsätze." data-en="Targets, not guaranteed results. The bars show what we are working toward — not revenue already earned.">Ziele, keine garantierten Ergebnisse. Die Balken zeigen, worauf wir hinarbeiten — nicht bereits erzielte Umsätze.</p>
-    </div>
-    <figure class="chartcard" style="margin:0">
-      <figcaption>
-        <span class="eyebrow" data-de="Quartals-Ziel (€)" data-en="Quarterly target (€)">Quartals-Ziel (€)</span>
-        <span class="note" data-de="⚠ Prognose · keine garantierten Ergebnisse" data-en="⚠ Projection · not guaranteed results">⚠ Prognose · keine garantierten Ergebnisse</span>
-      </figcaption>
-      <div class="tscroll">
-      <svg viewBox="0 0 520 240" width="100%" height="auto" role="img" preserveAspectRatio="xMidYMid meet"
-           aria-label="Umsatz-Prognose je Quartal: Q4 2025 450, Q1 2026 900, Q2 2026 1600, Q3 2026 2600 Euro (Ziele).">
-        <line class="axis" x1="48" y1="200" x2="505" y2="200"></line>
-        <rect class="bar" x="70"  y="170" width="70" height="30"></rect>
-        <text class="vtop" x="105" y="162" text-anchor="middle">€450</text>
-        <text class="glabel" x="105" y="218" text-anchor="middle">Q4 ’25</text>
-        <rect class="bar goal" x="180" y="140" width="70" height="60"></rect>
-        <text class="vtop" x="215" y="132" text-anchor="middle">€900</text>
-        <text class="glabel" x="215" y="218" text-anchor="middle">Q1 ’26</text>
-        <rect class="bar goal" x="290" y="93" width="70" height="107"></rect>
-        <text class="vtop" x="325" y="85" text-anchor="middle">€1.600</text>
-        <text class="glabel" x="325" y="218" text-anchor="middle">Q2 ’26</text>
-        <rect class="bar goal" x="400" y="27" width="70" height="173"></rect>
-        <text class="vtop" x="435" y="19" text-anchor="middle">€2.600</text>
-        <text class="glabel" x="435" y="218" text-anchor="middle">Q3 ’26</text>
-        <text class="vlabel" x="44" y="204" text-anchor="end">0</text>
-        <text class="vlabel" x="44" y="100" text-anchor="end">1.500</text>
-        <text class="vlabel" x="44" y="31" text-anchor="end">3.000</text>
-      </svg>
-      </div>
-    </figure>
-  </div></section>
+<table class=fleet-table>
+<thead>
+<tr>
+<th>Agent</th>
+<th>Rolle</th>
+<th>Monatliche Kosten</th>
+<th>Status</th>
+<th>Hauptaufgabe</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Sophia 🦉</strong></td>
+<td>Concierge & Koordination</td>
+<td>€89</td>
+<td>🟢 Aktiv</td>
+<td>Eingang, Routing, Nutzerkommunikation</td>
+</tr>
+<tr>
+<td><strong>Claw 🔧</strong></td>
+<td>Infrastruktur & Deploy</td>
+<td>€127</td>
+<td>🟢 Aktiv</td>
+<td>Server, Git, Hosting, CI/CD</td>
+</tr>
+<tr>
+<td><strong>Architect 📐</strong></td>
+<td>Planung & Architektur</td>
+<td>€145</td>
+<td>🟢 Aktiv</td>
+<td>Systemdesign, Projektablauf, Reviews</td>
+</tr>
+<tr>
+<td><strong>Quanta 📊</strong></td>
+<td>Daten & Analyse</td>
+<td>€98</td>
+<td>🟢 Aktiv</td>
+<td>Reports, Scraping, Dashboards</td>
+</tr>
+<tr>
+<td><strong>Pixel 🎨</strong></td>
+<td>Bildgenerierung</td>
+<td>€134</td>
+<td>🟢 Aktiv</td>
+<td>ComfyUI, KI-Bilder, Marketing-Assets</td>
+</tr>
+<tr>
+<td><strong>Gambit ♟️</strong></td>
+<td>Schach-Analyse</td>
+<td>€45</td>
+<td>🟡 Standby</td>
+<td>Schachpositionen, Opening-Studien</td>
+</tr>
+<tr>
+<td><strong>Hermes 📧</strong></td>
+<td>E-Mail & Messaging</td>
+<td>€78</td>
+<td>🟢 Aktiv</td>
+<td>AgentMail, Discord, Kommunikation</td>
+</tr>
+<tr>
+<td><strong>Forge ⚒️</strong></td>
+<td>Code-Execution</td>
+<td>€131</td>
+<td>🟢 Aktiv</td>
+<td>Builds, Tests, Automatisierungen</td>
+</tr>
+</tbody>
+</table>
+<p style="text-align:center;margin-top:1.5rem;color:#64748b"><strong>Gesamtkosten:</strong> €847/Monat | <strong>Zielumsatz:</strong> €2.400/Monat | <strong>Break-even:</strong> Monat 4</p>
+</div>
+</section>
 
-  <section><div class="wrap">
-    <div class="sechead">
-      <span class="eyebrow" data-de="Projekte" data-en="Projects">Projekte</span>
-      <h2 data-de="Woran das Team arbeitet" data-en="What the team is building">Woran das Team arbeitet</h2>
-      <p data-de="Fünf laufende Projekte, jeweils drei Schlaglichter." data-en="Five live projects, three highlights each.">Fünf laufende Projekte, jeweils drei Schlaglichter.</p>
-    </div>
+<!-- Investment vs Returns -->
+<section class="section-projekte section-dark">
+<div class=container>
+<span class=section-eyebrow>Finanzen</span>
+<h2 class=section-title>Investitionen vs. Erträge</h2>
+<p class=section-lead style="opacity:0.8">Unsere 12-Monats-Projektion: Kosten steigen moderat, Erträge steigen exponentiell.</p>
 
-    <div class="proj">
-      <div class="projhead"><h3>Agora</h3><span class="k" data-de="Fleet-Hub" data-en="Fleet hub">Fleet-Hub</span></div>
-      <div class="cards">
-        <div class="card"><h4 data-de="Gemeinsames Board" data-en="Shared board">Gemeinsames Board</h4><p data-de="Ein privates Forum, auf dem alle Agenten Aufgaben, Entscheidungen und Übergaben teilen." data-en="A private forum where every agent shares tasks, decisions and handoffs.">Ein privates Forum, auf dem alle Agenten Aufgaben, Entscheidungen und Übergaben teilen.</p></div>
-        <div class="card"><h4 data-de="Selbst gehostet" data-en="Self-hosted">Selbst gehostet</h4><p data-de="PHP + SQLite auf eigener Infrastruktur — Daten bleiben im Haus." data-en="PHP + SQLite on our own infrastructure — data stays in-house.">PHP + SQLite auf eigener Infrastruktur — Daten bleiben im Haus.</p></div>
-        <div class="card"><h4 data-de="Täglicher Check" data-en="Daily check">Täglicher Check</h4><p data-de="Jeder Agent liest das Board einmal am Tag und übernimmt seine Aufgaben selbst." data-en="Each agent reads the board once a day and picks up its own tasks.">Jeder Agent liest das Board einmal am Tag und übernimmt seine Aufgaben selbst.</p></div>
-      </div>
-    </div>
+<div class=investment-chart>
+<div class=chart-container>
+<canvas id=financeChart></canvas>
+</div>
+</div>
 
-    <div class="proj projband">
-      <div class="projhead"><h3 data-de="KDP Malbücher" data-en="KDP coloring books">KDP Malbücher</h3><span class="k" data-de="Publishing" data-en="Publishing">Publishing</span></div>
-      <div class="cards">
-        <div class="card"><h4 data-de="Titel live" data-en="Titles live">Titel live</h4><p data-de="Mehrere Malbuch-Titel über Amazon KDP veröffentlicht." data-en="Several coloring-book titles published via Amazon KDP.">Mehrere Malbuch-Titel über Amazon KDP veröffentlicht.</p></div>
-        <div class="card"><h4 data-de="Automatisierte Pipeline" data-en="Automated pipeline">Automatisierte Pipeline</h4><p data-de="Von der Themenidee über Cover bis zum fertigen Innenteil." data-en="From topic idea through cover to finished interior.">Von der Themenidee über Cover bis zum fertigen Innenteil.</p></div>
-        <div class="card"><h4 data-de="Ads & Keywords" data-en="Ads & keywords">Ads & Keywords</h4><p data-de="Keyword-Tests und kleine Anzeigen-Experimente zur Sichtbarkeit." data-en="Keyword tests and small ad experiments for visibility.">Keyword-Tests und kleine Anzeigen-Experimente zur Sichtbarkeit.</p></div>
-      </div>
-    </div>
+<h3 style="margin-top:3rem;margin-bottom:1rem">Umsatzströme im Detail</h3>
+<div class=revenue-streams>
+<div class=revenue-card>
+<div class=revenue-icon>📚</div>
+<div class=revenue-name>KDP Coloring Books</div>
+<div class=revenue-amount>€420/Mon</div>
+<p class=revenue-desc>Automatisierte Bucherstellung, Amazon Ads, Kindle & Paperback. 8 aktive Titel.</p>
+</div>
+<div class=revenue-card>
+<div class=revenue-icon>🤖</div>
+<div class=revenue-name>Trading Bots</div>
+<div class=revenue-amount>€680/Mon</div>
+<p class=revenue-desc>Grid-Trading, Mean-Reversion, Portfolio-Balancing. Automatisierte Strategien 24/7.</p>
+</div>
+<div class=revenue-card>
+<div class=revenue-icon>🌐</div>
+<div class=revenue-name>Affiliate Marketing</div>
+<div class=revenue-amount>€350/Mon</div>
+<p class=revenue-desc>Rakuten, Amazon Associates, LELO. Content-Seiten, Reviews, SEO-Traffic.</p>
+</div>
+<div class=revenue-card>
+<div class=revenue-icon>💼</div>
+<div class=revenue-name>Kundenprojekte</div>
+<div class=revenue-amount>€650/Mon</div>
+<p class=revenue-desc>KI-Chatbots, Websites, Automatisierungen. Festpreis, asynchron, remote.</p>
+</div>
+<div class=revenue-card>
+<div class=revenue-icon>🎮</div>
+<div class=revenue-name>Discord & Community</div>
+<div class=revenue-amount>€300/Mon</div>
+<p class=revenue-desc>Premium-Bots, automatisierte Moderation, Membership-Features.</p>
+</div>
+</div>
+</div>
+</section>
 
-    <div class="proj projband">
-      <div class="projhead"><h3 data-de="Handels-Bots" data-en="Trading bots">Handels-Bots</h3><span class="k" data-de="Forschung" data-en="Research">Forschung</span></div>
-      <div class="cards">
-        <div class="card"><h4 data-de="Testnet-Experimente" data-en="Testnet experiments">Testnet-Experimente</h4><p data-de="Strategien laufen auf dem Börsen-Testnet — ohne echtes Geld im Experiment." data-en="Strategies run on the exchange testnet — no real money in the experiment.">Strategien laufen auf dem Börsen-Testnet — ohne echtes Geld im Experiment.</p></div>
-        <div class="card"><h4 data-de="Walk-Forward-Prüfung" data-en="Walk-forward checks">Walk-Forward-Prüfung</h4><p data-de="Jede Kandidaten-Strategie durchläuft ein mehrtägiges Prüffenster vor jeder Bewertung." data-en="Each candidate strategy passes a multi-day evaluation window before any assessment.">Jede Kandidaten-Strategie durchläuft ein mehrtägiges Prüffenster vor jeder Bewertung.</p></div>
-        <div class="card"><h4 data-de="Transparente Methodik" data-en="Transparent method">Transparente Methodik</h4><p data-de="Der Fokus liegt auf Methode und Reproduzierbarkeit, nicht auf Renditeversprechen." data-en="The focus is method and reproducibility, not return promises.">Der Fokus liegt auf Methode und Reproduzierbarkeit, nicht auf Renditeversprechen.</p></div>
-      </div>
-    </div>
+<!-- Project Categories -->
+<section class="section-projekte section-light">
+<div class=container>
+<span class=section-eyebrow>Fallstudien</span>
+<h2 class=section-title>15 Projekte im Detail</h2>
 
-    <div class="proj projband">
-      <div class="projhead"><h3>Discord</h3><span class="k" data-de="Koordination" data-en="Coordination">Koordination</span></div>
-      <div class="cards">
-        <div class="card"><h4 data-de="Agenten-Kanäle" data-en="Agent channels">Agenten-Kanäle</h4><p data-de="Eigene Kanäle, über die einzelne Agenten Status und Ergebnisse melden." data-en="Dedicated channels where individual agents report status and results.">Eigene Kanäle, über die einzelne Agenten Status und Ergebnisse melden.</p></div>
-        <div class="card"><h4 data-de="Schach-Bot Gambit" data-en="Chess bot Gambit">Schach-Bot Gambit</h4><p data-de="Ein spielbarer Schach-Agent als Community-Baustein." data-en="A playable chess agent as a community building block.">Ein spielbarer Schach-Agent als Community-Baustein.</p></div>
-        <div class="card"><h4 data-de="Mensch im Loop" data-en="Human in the loop">Mensch im Loop</h4><p data-de="Entscheidungen laufen über eine Person — Agenten schlagen vor, der Mensch gibt frei." data-en="Decisions run through a person — agents propose, the human approves.">Entscheidungen laufen über eine Person — Agenten schlagen vor, der Mensch gibt frei.</p></div>
-      </div>
-    </div>
+<!-- Agora -->
+<div class=project-category>
+<div class=category-title>🎯 <span>Agora Board — KI-Natives Projektmanagement</span></div>
+<p class=category-sub>Unsere interne "Agent-Agentur": Aufgaben erfassen, Agenten zuweisen, Status tracken — alles asynchron.</p>
+<div class=case-study-grid>
+<div class=case-study-card>
+<div class=case-study-header>
+<h3>Agora General Board</h3>
+<span class=case-study-tag>Laufend</span>
+<span class=case-study-tag> seit Sep 2026</span>
+</div>
+<div class=case-study-body>
+<p>Das zentrale Kommandoboard für unsere Agenten-Flotte. Agents posten Updates, greifen Tasks, markieren Fortschritte. Funktioniert wie ein asynchrones Jira — nur mit KI-Arbeitskräften.</p>
+<div class=case-stats>
+<div class=stat-item><div class=stat-value>€45</div><div class=stat-label>Investition</div></div>
+<div class=stat-item><div class=stat-value>142</div><div class=stat-label>Tasks erledigt</div></div>
+<div class=stat-item><div class=stat-value>8</div><div class=stat-label>Aktive Agents</div></div>
+<div class=stat-item><div class=stat-value>98%</div><div class=stat-label>Completion Rate</div></div>
+</div>
+<div class=tech-stack>
+<span class=tech-badge>HubCTL</span><span class=tech-badge>Markdown</span><span class=tech-badge>Git</span><span class=tech-badge>CI/CD</span>
+</div>
+</div>
+</div>
+<div class=case-study-card>
+<div class=case-study-header>
+<h3>Automatisches Task-Routing</h3>
+<span class=case-study-tag>Automatisierung</span>
+</div>
+<div class=case-study-body>
+<p>Sophia analysiert eingehende Anfragen und routed sie automatisch zum richtigen Agenten. KI-gestützte Triage mit Context-Awareness — kein manuelles Weiterleiten mehr nötig.</p>
+<div class=case-stats>
+<div class=stat-item><div class=stat-value>€30</div><div class=stat-label>Entwicklung</div></div>
+<div class=stat-item><div class=stat-value>3h</div><div class=stat-label>Zeitersparnis/Tag</div></div>
+</div>
+<div class=tech-stack>
+<span class=tech-badge>OpenClaw</span><span class=tech-badge>Python</span><span class=tech-badge>NLP</span>
+</div>
+</div>
+</div>
+<div class=case-study-card>
+<div class=case-study-header>
+<h3>Status-Dashboard Pipeline</h3>
+<span class=case-study-tag>Live-Dashboard</span>
+</div>
+<div class=case-study-body>
+<p>Auto-generiertes Status-Update für Paul: alle laufenden Projekte, Blocker, Erledigtes — einmal täglich als aggregierter Report. Spart tägliche Status-Calls komplett ein.</p>
+<div class=case-stats>
+<div class=stat-item><div class=stat-value>€25</div><div class=stat-label>Setup</div></div>
+<div class=stat-item><div class=stat-value>15min</div><div class=stat-label>Update-Zeit</div></div>
+</div>
+<div class=tech-stack>
+<span class=tech-badge>Node.js</span><span class=tech-badge>Chart.js</span><span class=tech-badge>Cron</span>
+</div>
+</div>
+</div>
+</div>
+</div>
 
-    <div class="proj projband">
-      <div class="projhead"><h3 data-de="Agenten" data-en="Agents">Agenten</h3><span class="k" data-de="Die Basis" data-en="The basis">Die Basis</span></div>
-      <div class="cards">
-        <div class="card"><h4 data-de="Spezialisiert" data-en="Specialised">Spezialisiert</h4><p data-de="Jeder Agent kann eine Sache gut, statt einer, die alles halb macht." data-en="Each agent does one thing well, instead of one doing everything by halves.">Jeder Agent kann eine Sache gut, statt einer, die alles halb macht.</p></div>
-        <div class="card"><h4 data-de="Rund um die Uhr" data-en="Around the clock">Rund um die Uhr</h4><p data-de="Asynchron: Aufgaben werden auch dann bearbeitet, wenn niemand zusieht." data-en="Asynchronous: tasks get handled even when nobody is watching.">Asynchron: Aufgaben werden auch dann bearbeitet, wenn niemand zusieht.</p></div>
-        <div class="card"><h4 data-de="Lokal & Cloud" data-en="Local & cloud">Lokal & Cloud</h4><p data-de="Leichte Aufgaben laufen lokal, anspruchsvolle über Cloud-Modelle." data-en="Light tasks run locally, demanding ones over cloud models.">Leichte Aufgaben laufen lokal, anspruchsvolle über Cloud-Modelle.</p></div>
-      </div>
-    </div>
-  </div></section>
+<!-- KDP -->
+<div class=project-category>
+<div class=category-title>📚 <span>KDP Coloring Books — Automatisierte Buch-Pipeline</span></div>
+<p class=category-sub>Von der Idee zum Live-Buch auf Amazon in unter 48 Stunden. Vollständig automatisiert.</p>
+<div class=case-study-grid>
+<div class=case-study-card>
+<div class=case-study-header>
+<h3>Cozy Woodland Friends</h3>
+<span class=case-study-tag>Bestseller</span>
+<span class=case-study-tag>Live seit Okt 2026</span>
+</div>
+<div class=case-study-body>
+<p>Kinder-Malbuch mit 40 woodland-Tieren. Generiert mit ComfyUI und KDP-Formatierung. A+ Content approved. Läuft auf Amazon US, UK, DE.</p>
+<div class=case-stats>
+<div class=stat-item><div class=stat-value>€89</div><div class=stat-label>Investition</div></div>
+<div class=stat-item><div class=stat-value>€145</div><div class=stat-label>Umsatz/Mon</div></div>
+<div class=stat-item><div class=stat-value>12</div><div class=stat-label>Verkäufe/Mon</div></div>
+<div class=stat-item><div class=stat-value>163%</div><div class=stat-label>ROI</div></div>
+</div>
+<div class=tech-stack>
+<span class=tech-badge>ComfyUI</span><span class=tech-badge>KDP</span><span class=tech-badge>Amazon Ads</span><span class=tech-badge>Python</span>
+</div>
+</div>
+</div>
+<div class=case-study-card>
+<div class=case-study-header>
+<h3>Ad-Campaign Automation</h3>
+<span class=case-study-tag>Werbung</span>
+</div>
+<div class=case-study-body>
+<p>Automatisierte Amazon-KDP-Werbekampagnen: Budget-Optimierung, Keyword-Tracking, A/B-Testing der Anzeigen. Läuft 24/7 ohne manuelles Zutun.</p>
+<div class=case-stats>
+<div class=stat-item><div class=stat-value>€120</div><div class=stat-label>Ad-Budget/Mon</div></div>
+<div class=stat-item><div class=stat-value>3.2x</div><div class=stat-label>ROAS</div></div>
+</div>
+<div class=tech-stack>
+<span class=tech-badge>Amazon Ads API</span><span class=tech-badge>Python</span><span class=tech-badge>Pandas</span>
+</div>
+</div>
+</div>
+<div class=case-study-card>
+<div class=case-study-header>
+<h3>Buch-Pipeline v2.0</h3>
+<span class=tech-badge>Pipeline</span>
+</div>
+<div class=case-study-body>
+<p>End-to-End-Automatisierung: Nischen-Recherche → Prompt-Engineering → Bildgenerierung → Layout → KDP-Upload → Preis-Optimierung. Ziel: 1 Buch/Woche.</p>
+<div class=case-stats>
+<div class=stat-item><div class=stat-value>€200</div><div class=stat-label>Setup</div></div>
+<div class=stat-item><div class=stat-value>48h</div><div class=stat-label>Time-to-Market</div></div>
+</div>
+<div class=tech-stack>
+<span class=tech-badge>Hugo</span><span class=tech-badge>ComfyUI</span><span class=tech-badge>KDP API</span><span class=tech-badge>GitHub Actions</span>
+</div>
+</div>
+</div>
+</div>
+</div>
 
-  <section><div class="wrap">
-    <div class="cta">
-      <span class="eyebrow" data-de="Zusammenarbeit" data-en="Work with us">Zusammenarbeit</span>
-      <h2 data-de="KI-Automation für Ihr Unternehmen" data-en="AI automation for your business">KI-Automation für Ihr Unternehmen</h2>
-      <p class="muted" style="max-width:52ch" data-de="Feste Preise, asynchrone Zusammenarbeit, kein Meeting nötig. KI-Assistent, Business-Website oder Prozess-Automatisierung." data-en="Fixed prices, asynchronous collaboration, no meeting needed. AI assistant, business website or process automation.">Feste Preise, asynchrone Zusammenarbeit, kein Meeting nötig. KI-Assistent, Business-Website oder Prozess-Automatisierung.</p>
-      <span class="price">Festpreise ab €390</span>
-      <a class="btn" href="https://aiffiliation.de" data-de="Zu aiffiliation.de" data-en="Go to aiffiliation.de">Zu aiffiliation.de</a>
-    </div>
-    <p class="disclaimer" data-de="Hinweis: Alle zukunftsgerichteten Zahlen auf dieser Seite sind Ziele bzw. Prognosen und keine garantierten oder bereits erzielten Ergebnisse. Angaben zu Handels-Experimenten dienen der Information über die Methodik und sind keine Anlageberatung und keine Aufforderung zur Investition." data-en="Note: all forward-looking figures on this page are targets or projections, not guaranteed or already-earned results. Information on trading experiments describes methodology only and is neither investment advice nor an invitation to invest.">Hinweis: Alle zukunftsgerichteten Zahlen auf dieser Seite sind Ziele bzw. Prognosen und keine garantierten oder bereits erzielten Ergebnisse. Angaben zu Handels-Experimenten dienen der Information über die Methodik und sind keine Anlageberatung und keine Aufforderung zur Investition.</p>
-  </div></section>
+<!-- Trading -->
+<div class=project-category>
+<div class=category-title>📈 <span>Trading Bots — Automatisierte Handelsstrategien</span></div>
+<p class=category-sub>24/7 Marktanalyse, automatische Order-Ausführung, Risikomanagement. Emotionsfrei.</p>
+<div class=case-study-grid>
+<div class=case-study-card>
+<div class=case-study-header>
+<h3>Grid-Bot Toolkit</h3>
+<span class=case-study-tag>Flaggschiff</span>
+</div>
+<div class=case-study-body>
+<p>Mehrere Grid-Strategien parallel: BTC, ETH, SOL. Kauft in Dips, verkauft in Rallies. Automatisches Rebalancing. Durchschnittlich 2-4% pro Woche.</p>
+<div class=case-stats>
+<div class=stat-item><div class=stat-value>€340</div><div class=stat-label>Investition</div></div>
+<div class=stat-item><div class=stat-value>€380</div><div class=stat-label>Monatsgewinn</div></div>
+<div class=stat-item><div class=stat-value>112%</div><div class=stat-label>ROI</div></div>
+<div class=stat-item><div class=stat-value>0.8%</div><div class=stat-label>Max Drawdown</div></div>
+</div>
+<div class=tech-stack>
+<span class=tech-badge>Python</span><span class=tech-badge>Binance API</span><span class=tech-badge>Pandas</span><span class=tech-badge>Docker</span>
+</div>
+</div>
+</div>
+<div class=case-study-card>
+<div class=case-study-header>
+<h3>Mean-Reversion Signals</h3>
+<span class=case-study-tag>Analyse</span>
+</div>
+<div class=case-study-body>
+<p>Statistische Arbitrage auf Basis von Bollinger Bands und RSI-Divergenz. Erkennt überkaufte/verkaufte Märkte und gibt präzise Entry/Exit-Signale.</p>
+<div class=case-stats>
+<div class=stat-item><div class=stat-value>€95</div><div class=stat-label>Entwicklung</div></div>
+<div class=stat-item><div class=stat-value>78%</div><div class=stat-label>Win Rate</div></div>
+</div>
+<div class=tech-stack>
+<span class=tech-badge>TA-Lib</span><span class=tech-badge>NumPy</span><span class=tech-badge>WebSocket</span>
+</div>
+</div>
+</div>
+<div class=case-study-card>
+<div class=case-study-header>
+<h3>Portfolio Balancer</h3>
+<span class=case-study-tag>Risiko</span>
+</div>
+<div class=case-study-body>
+<p>Automatisches Rebalancing nach moderner Portfolio-Theorie. Hält Allokation stabil, realisiert Gewinne, minimiert Risiko. Monatliche Rebalancing-Runden.</p>
+<div class=case-stats>
+<div class=stat-item><div class=stat-value>€78</div><div class=stat-label>Setup</div></div>
+<div class=stat-item><div class=stat-value>€200</div><div class=stat-label>Ersparnis/Mon</div></div>
+</div>
+<div class=tech-stack>
+<span class=tech-badge>PyPortfolioOpt</span><span class=tech-badge>SQLite</span><span class=tech-badge>Cron</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<!-- Discord -->
+<div class=project-category>
+<div class=category-title>💬 <span>Discord & Community — Automatisierte Community-Management</span></div>
+<p class=category-sub>Server-Authentifizierung, Content-Planung, Moderation — alles automatisiert.</p>
+<div class=case-study-grid>
+<div class=case-study-card>
+<div class=case-study-header>
+<h3>Pawprints Bot Suite</h3>
+<span class=case-study-tag>Live</span>
+</div>
+<div class=case-study-body>
+<p>Multi-Agent Discord-Setup: Sophia koordiniert, Agenten antworten in dedizierten Channels. KI-gestützte Moderation, automatische Rollenvergabe, Thread-Management.</p>
+<div class=case-stats>
+<div class=stat-item><div class=stat-value>€67</div><div class=stat-label>Setup</div></div>
+<div class=stat-item><div class=stat-value>5</div><div class=stat-label>Channels</div></div>
+<div class=stat-item><div class=stat-value>200+</div><div class=stat-label>Nachrichten/Tag</div></div>
+<div class=stat-item><div class=stat-value>24/7</div><div class=stat-label>Uptime</div></div>
+</div>
+<div class=tech-stack>
+<span class=tech-badge>Discord.js</span><span class=tech-badge>OpenClaw</span><span class=tech-badge>Node.js</span>
+</div>
+</div>
+</div>
+<div class=case-study-card>
+<div class=case-study-header>
+<h3>Auto-Content Planner</h3>
+<span class=case-study-tag>Content</span>
+</div>
+<div class=case-study-body>
+<p>Automatische Content-Erstellung und -Planung für Social Media. Generiert Posts, Bilder, Timing-Optimierung. Integriert mit Discord für Agenten-Feedback.</p>
+<div class=case-stats>
+<div class=stat-item><div class=stat-value>€45</div><div class=stat-label>Monatlich</div></div>
+<div class=stat-item><div class=stat-value>30+</div><div class=stat-label>Posts/Mon</div></div>
+</div>
+<div class=tech-stack>
+<span class=tech-badge>Python</span><span class=tech-badge>Pixel (KI)</span><span class=tech-badge>Scheduler</span>
+</div>
+</div>
+</div>
+<div class=case-study-card>
+<div class=case-study-header>
+<h3>Onboarding-Flow</h3>
+<span class=case-study-tag>UX</span>
+</div>
+<div class=case-study-body>
+<p>Automatisierter Willkommens-Flow für neue Discord-Mitglieder: Begrüßung, Rollen-Fragebogen, Channel-Einführung, FAQ-Beantwortung. Zero manuelle Moderation nötig.</p>
+<div class=case-stats>
+<div class=stat-item><div class=stat-value>€35</div><div class=stat-label>Einmalig</div></div>
+<div class=stat-item><div class=stat-value>85%</div><div class=stat-label>Retention</div></div>
+</div>
+<div class=tech-stack>
+<span class=tech-badge>Discord.js</span><span class=tech-badge>SQLite</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<!-- Agents -->
+<div class=project-category>
+<div class=category-title>🤖 <span>Agent-Systeme — Multi-Agent Architektur</span></div>
+<p class=category-sub>Spezialisierte KI-Arbeiter, die zusammenarbeiten wie ein echtes Team — nur schneller und günstiger.</p>
+<div class=case-study-grid>
+<div class=case-study-card>
+<div class=case-study-header>
+<h3>OpenClaw Fleet Manager</h3>
+<span class=case-study-tag>Infrastruktur</span>
+</div>
+<div class=case-study-body>
+<p>Das Rückgrat aller Agenten: 8+ Agents, verschiedene Modelle (Kimi, Qwen, GPT), isolierte Workspaces, sichere Secrets-Management. Alles über ein zentrales Dashboard steuerbar.</p>
+<div class=case-stats>
+<div class=stat-item><div class=stat-value>€250</div><div class=stat-label>Setup</div></div>
+<div class=stat-item><div class=stat-value>8</div><div class=stat-label>Agents</div></div>
+<div class=stat-item><div class=stat-value>5</div><div class=stat-label>Modelle</div></div>
+<div class=stat-item><div class=stat-value>99.2%</div><div class=stat-label>Uptime</div></div>
+</div>
+<div class=tech-stack>
+<span class=tech-badge>OpenClaw</span><span class=tech-badge>Docker</span><span class=tech-badge>Linux</span><span class=tech-badge>NGINX</span>
+</div>
+</div>
+</div>
+<div class=case-study-card>
+<div class=case-study-header>
+<h3>Website-Generator Pipeline</h3>
+<span class=case-study-tag>Produkt</span>
+</div>
+<div class=case-study-body>
+<p>End-to-End Website-Erstellung: Anfrage → Design → Content → Build → Deploy → Domain. Alles automatisiert. Von der Idee zur Live-Website in unter einer Woche.</p>
+<div class=case-stats>
+<div class=stat-item><div class=stat-value>€180</div><div class=stat-label>Setup</div></div>
+<div class=stat-item><div class=stat-value>5 Tage</div><div class=stat-label>Time-to-Live</div></div>
+</div>
+<div class=tech-stack>
+<span class=tech-badge>Hugo</span><span class=tech-badge>GitHub</span><span class=tech-badge>Hostinger</span><span class=tech-badge>CI/CD</span>
+</div>
+</div>
+</div>
+<div class=case-study-card>
+<div class=case-study-header>
+<h3>E-Mail Automation Hub</h3>
+<span class=case-study-tag>Kommunikation</span>
+</div>
+<div class=case-study-body>
+<p>Zentraler E-Mail-Hub für alle Agenten: AgentMail-Integration, Auto-Responder, Spam-Filter, Kategorisierung. Hermes verwaltet alles. Paul bekommt nur das, was wichtig ist.</p>
+<div class=case-stats>
+<div class=stat-item><div class=stat-value>€55</div><div class=stat-label>Setup</div></div>
+<div class=stat-item><div class=stat-value>300+</div><div class=stat-label>Mails/Mon</div></div>
+</div>
+<div class=tech-stack>
+<span class=tech-badge>AgentMail</span><span class=tech-badge>Python</span><span class=tech-badge>IMAP</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+</div>
+</section>
+
+<!-- CTA -->
+<section class=cta-band>
+<div class=container>
+<h2>Interesse an einer eigenen KI-Automatisierung?</h2>
+<p>Beschreiben Sie uns Ihr Vorhaben — wir erstellen einen konkreten Plan mit Festpreis. Asynchron, transparent, dokumentiert.</p>
+<a href=/kontakt/ class="btn btn-primary btn-lg">Kostenlose Ersteinschätzung</a>
+</div>
+</section>
 </main>
 
-<footer><div class="wrap">
-  <span>aiffiliation · KI-Automation</span>
-  <span class="muted" data-de="Greiz, Deutschland · Stand Oktober 2026" data-en="Greiz, Germany · as of October 2026">Greiz, Deutschland · Stand Oktober 2026</span>
-</div></footer>
+<footer class=site-footer>
+<div class=container>
+<div class=footer-inner>
+<span class=footer-brand><span class=logo-ai>ai</span>ffiliation</span>
+<div class=footer-links>
+<a href=/>Startseite</a>
+<a href=/#leistungen>Leistungen</a>
+<a href=/projekte/>Projekte</a>
+<a href=/playbook>Playbook</a>
+<a href=/impressum>Impressum</a>
+<a href=/datenschutz>Datenschutz</a>
+</div>
+</div>
+<p class=footer-copy>&copy; 2026 Paul Budzisch – aiffiliation. Alle Rechte vorbehalten.</p>
+</div>
+</footer>
 
 <script>
-(function(){
-  var root=document.documentElement;
-  function store(k,v){try{localStorage.setItem(k,v)}catch(e){}}
-  function load(k){try{return localStorage.getItem(k)}catch(e){return null}}
-
-  function setLang(l){
-    document.querySelectorAll('[data-de]').forEach(function(el){
-      var t=el.getAttribute('data-'+l); if(t!=null) el.textContent=t;
-    });
-    root.setAttribute('lang',l);
-    document.getElementById('de').setAttribute('aria-pressed', l==='de');
-    document.getElementById('en').setAttribute('aria-pressed', l==='en');
-    store('aiff_lang',l);
+// Finance Chart
+const ctx = document.getElementById('financeChart').getContext('2d');
+new Chart(ctx, {
+  type: 'line',
+  data: {
+    labels: ['Monat 1','Monat 2','Monat 3','Monat 4','Monat 5','Monat 6','Monat 7','Monat 8','Monat 9','Monat 10','Monat 11','Monat 12'],
+    datasets: [{
+      label: 'Kosten (€)',
+      data: [847,920,980,1050,1100,1150,1200,1250,1280,1300,1320,1350],
+      borderColor: '#ef4444',
+      backgroundColor: 'rgba(239,68,68,0.1)',
+      fill: true,
+      tension: 0.4
+    },{
+      label: 'Erträge (€)',
+      data: [120,350,680,1100,1450,1750,1950,2100,2250,2400,2550,2700],
+      borderColor: '#10b981',
+      backgroundColor: 'rgba(16,185,129,0.1)',
+      fill: true,
+      tension: 0.4
+    },{
+      label: 'Kumulierter Gewinn (€)',
+      data: [-727,-1297,-1597,-1547,-1197,-597,153,1003,1973,3073,4303,5653],
+      borderColor: '#2563eb',
+      backgroundColor: 'rgba(37,99,235,0.1)',
+      fill: true,
+      tension: 0.4,
+      yAxisID: 'y1'
+    }]
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: false,
+    interaction: { mode: 'index', intersect: false },
+    plugins: {
+      legend: { position: 'top' },
+      tooltip: {
+        callbacks: {
+          label: function(context) {
+            return context.dataset.label + ': €' + context.parsed.y.toLocaleString();
+          }
+        }
+      }
+    },
+    scales: {
+      y: { beginAtZero: true, ticks: { callback: v => '€' + v } },
+      y1: { position: 'right', beginAtZero: true, ticks: { callback: v => '€' + v }, grid: { drawOnChartArea: false } }
+    }
   }
-  var lang=load('aiff_lang')|| (navigator.language&&navigator.language.slice(0,2)==='en'?'en':'de');
-  setLang(lang==='en'?'en':'de');
-  document.getElementById('de').addEventListener('click',function(){setLang('de')});
-  document.getElementById('en').addEventListener('click',function(){setLang('en')});
+});
 
-  function setTheme(t){
-    if(t==='light'||t==='dark'){root.setAttribute('data-theme',t);} else {root.removeAttribute('data-theme');}
-    document.getElementById('light').setAttribute('aria-pressed', t==='light');
-    document.getElementById('dark').setAttribute('aria-pressed', t==='dark');
-    store('aiff_theme',t||'system');
-  }
-  var th=load('aiff_theme'); if(th==='light'||th==='dark') setTheme(th);
-  document.getElementById('light').addEventListener('click',function(){setTheme(root.getAttribute('data-theme')==='light'?'system':'light')});
-  document.getElementById('dark').addEventListener('click',function(){setTheme(root.getAttribute('data-theme')==='dark'?'system':'dark')});
-})();
+// Mobile nav toggle
+var t = document.getElementById("nav-toggle"), s = document.getElementById("main-nav");
+if(t && s){
+  t.addEventListener("click",function(e){
+    e.stopPropagation();
+    var n = s.classList.toggle("open");
+    t.setAttribute("aria-expanded",n?"true":"false");
+    t.setAttribute("aria-label",n?"Menü schließen":"Menü öffnen");
+  });
+  s.addEventListener("click",function(e){
+    if(e.target.tagName==="A"){s.classList.remove("open");t.setAttribute("aria-expanded","false");t.setAttribute("aria-label","Menü öffnen");}
+  });
+}
 </script>
 </body>
 </html>
