@@ -54,3 +54,7 @@ footer a:hover{color:var(--ultra)}
 .legal h2{font-size:19px;margin-top:28px}
 .placeholder{background:#eef1fb;border:1px dashed var(--ultra);border-radius:8px;padding:14px 16px;
   color:var(--ultra-deep);font-size:15px}
+
+a.mark .seal { width:44px; height:44px; border-radius:50%; object-fit:cover; margin-right:10px; vertical-align:middle; }
+a.mark .mktxt { display:inline-block; vertical-align:middle; line-height:1; }
+a.mark .mktxt em { font-style:normal; color:var(--ultra); }
