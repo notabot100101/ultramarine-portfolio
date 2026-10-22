@@ -1,1 +1,16 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><rect width="32" height="32" rx="7" fill="#1f2fa6"/><text x="16" y="22" font-family="sans-serif" font-size="14" font-weight="800" fill="#fff" text-anchor="middle">U9</text></svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" width="512" height="512" role="img" aria-label="Ultramarines omega badge">
+ <defs>
+  <radialGradient id="navy" cx="44%" cy="38%" r="72%">
+   <stop offset="0%" stop-color="#26377b"/><stop offset="60%" stop-color="#1b2960"/><stop offset="100%" stop-color="#121d44"/>
+  </radialGradient>
+  <linearGradient id="au" x1="0" y1="0" x2="0" y2="1">
+   <stop offset="0%" stop-color="#f2d886"/><stop offset="48%" stop-color="#caa24a"/><stop offset="100%" stop-color="#8a6a2a"/>
+  </linearGradient>
+  <path id="u" fill="none" d="M 70 76 L 90 88 A 50 50 0 1 0 150 88 L 170 76"/>
+ </defs>
+ <circle cx="120" cy="120" r="116" fill="#0c1430"/>
+ <circle cx="120" cy="120" r="114" fill="url(#navy)"/>
+ <circle cx="120" cy="120" r="110" fill="none" stroke="url(#au)" stroke-width="6"/>
+ <use href="#u" stroke="url(#au)" stroke-width="29" stroke-linecap="round" stroke-linejoin="round"/>
+ <use href="#u" stroke="#ffffff" stroke-width="22" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
